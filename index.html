@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Stack Dev — Learning Path</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0f;
+      --bg2: #141416;
+      --bg3: #1a1a1e;
+      --bg4: #222228;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(255, 255, 255, 0.12);
+      --text: #f0ede8;
+      --text2: #9997a0;
+      --text3: #5c5a65;
+      --accent: #e8a84c;
+      --accent2: #f0c278;
+      --accent-bg: rgba(232, 168, 76, 0.1);
+      --accent-border: rgba(232, 168, 76, 0.25);
+      --green: #4caf7d;
+      --green-bg: rgba(76, 175, 125, 0.1);
+      --blue: #5b9bd5;
+      --blue-bg: rgba(91, 155, 213, 0.1);
+      --purple: #9b82f3;
+      --purple-bg: rgba(155, 130, 243, 0.1);
+      --coral: #e87c5a;
+      --coral-bg: rgba(232, 124, 90, 0.1);
+      --teal: #4dbfaa;
+      --teal-bg: rgba(77, 191, 170, 0.1);
+      --radius: 10px;
+      --radius-sm: 6px;
+      --sidebar-w: 280px;
+      --header-h: 56px;
+    }
+
+    .light {
+      --bg: #f7f5f0;
+      --bg2: #ffffff;
+      --bg3: #f0ede6;
+      --bg4: #e8e4dc;
+      --border: rgba(0, 0, 0, 0.07);
+      --border2: rgba(0, 0, 0, 0.12);
+      --text: #1a1814;
+      --text2: #6b6560;
+      --text3: #a09890;
+      --accent: #c17a1a;
+      --accent2: #a86510;
+      --accent-bg: rgba(193, 122, 26, 0.08);
+      --accent-border: rgba(193, 122, 26, 0.2);
+      --green: #2d8a55;
+      --green-bg: rgba(45, 138, 85, 0.08);
+      --blue: #2563a8;
+      --blue-bg: rgba(37, 99, 168, 0.08);
+      --purple: #6b4ec9;
+      --purple-bg: rgba(107, 78, 201, 0.08);
+      --coral: #c05535;
+      --coral-bg: rgba(192, 85, 53, 0.08);
+      --teal: #1e8a78;
+      --teal-bg: rgba(30, 138, 120, 0.08);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background .3s, color .3s
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit
+    }
+
+    /* HEADER */
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 20px 0 0;
+      z-index: 100;
+      gap: 0
+    }
+
+    #logo-area {
+      width: var(--sidebar-w);
+      min-width: var(--sidebar-w);
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-right: 1px solid var(--border)
+    }
+
+    #logo-area .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      color: #000
+    }
+
+    #logo-area .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.3px
+    }
+
+    #logo-area .logo-text span {
+      color: var(--accent)
+    }
+
+    #header-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 20px
+    }
+
+    #search-wrap {
+      flex: 1;
+      max-width: 340px;
+      position: relative
+    }
+
+    #search-wrap i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--text3);
+      pointer-events: none
+    }
+
+    #search {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px 7px 32px;
+      font-size: 14px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border .2s
+    }
+
+    #search:focus {
+      border-color: var(--accent-border)
+    }
+
+    #search::placeholder {
+      color: var(--text3)
+    }
+
+    #progress-global {
+      flex: 1;
+      max-width: 200px
+    }
+
+    #progress-global .prog-label {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between
+    }
+
+    #prog-bar-wrap {
+      height: 3px;
+      background: var(--bg4);
+      border-radius: 2px
+    }
+
+    #prog-bar-fill {
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width .5s
+    }
+
+    #theme-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--text2);
+      transition: all .2s;
+      flex-shrink: 0
+    }
+
+    #theme-btn:hover {
+      border-color: var(--border2);
+      color: var(--text)
+    }
+
+    /* LAYOUT */
+    #layout {
+      display: flex;
+      padding-top: var(--header-h);
+      min-height: 100vh
+    }
+
+    /* SIDEBAR */
+    #sidebar {
+      width: var(--sidebar-w);
+      min-width: var(--sidebar-w);
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 16px 0 40px
+    }
+
+    #sidebar::-webkit-scrollbar {
+      width: 4px
+    }
+
+    #sidebar::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    #sidebar::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 2px
+    }
+
+    .phase-group {
+      margin-bottom: 4px
+    }
+
+    .phase-group-header {
+      padding: 14px 20px 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .phase-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .phase-group-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background .15s;
+      position: relative;
+      border-left: 2px solid transparent
+    }
+
+    .sidebar-item:hover {
+      background: var(--bg3)
+    }
+
+    .sidebar-item.active {
+      background: var(--accent-bg);
+      border-left-color: var(--accent)
+    }
+
+    .sidebar-item .mod-num {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text3);
+      width: 22px;
+      flex-shrink: 0
+    }
+
+    .sidebar-item .mod-name {
+      font-size: 14px;
+      color: var(--text2);
+      flex: 1;
+      line-height: 1.3
+    }
+
+    .sidebar-item.active .mod-name {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .sidebar-item .check {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: transparent;
+      transition: all .2s
+    }
+
+    .sidebar-item .check.done {
+      background: var(--green);
+      border-color: var(--green);
+      color: #000
+    }
+
+    /* MAIN */
+    #main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-width: 0;
+      padding: 40px 48px 80px
+    }
+
+    @media(max-width:1100px) {
+      #main {
+        padding: 32px 28px 60px
+      }
+    }
+
+    /* MODULE PAGE */
+    .mod-page {
+      display: none;
+      animation: fadeIn .25s ease
+    }
+
+    .mod-page.active {
+      display: block
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* MODULE HEADER */
+    .mod-header {
+      margin-bottom: 32px
+    }
+
+    .mod-header .phase-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid;
+      margin-bottom: 14px
+    }
+
+    .mod-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 37px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 10px
+    }
+
+    .mod-header .subtitle {
+      font-size: 17px;
+      color: var(--text2);
+      line-height: 1.6;
+      max-width: 620px
+    }
+
+    .mod-meta-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+      flex-wrap: wrap
+    }
+
+    .meta-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text2);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    /* OVERVIEW CARDS */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 36px
+    }
+
+    .ov-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px
+    }
+
+    .ov-card .ov-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 23px;
+      font-weight: 700;
+      margin-bottom: 3px
+    }
+
+    .ov-card .ov-lbl {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em
+    }
+
+    /* SECTION HEADERS */
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border)
+    }
+
+    /* SKILLS */
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px
+    }
+
+    .skill-tag {
+      font-size: 13px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    /* WEEKLY PLAN */
+    .week-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 36px
+    }
+
+    .week-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .2s
+    }
+
+    .week-card:hover {
+      border-color: var(--border2)
+    }
+
+    .week-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .week-num-badge {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      background: var(--bg4);
+      color: var(--text3);
+      border: 1px solid var(--border)
+    }
+
+    .week-title-text {
+      font-size: 15px;
+      font-weight: 500;
+      flex: 1
+    }
+
+    .week-hours {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .diff-row {
+      display: flex;
+      gap: 3px
+    }
+
+    .diff-pip {
+      width: 14px;
+      height: 3px;
+      border-radius: 2px
+    }
+
+    .week-chev {
+      font-size: 14px;
+      color: var(--text3);
+      transition: transform .25s
+    }
+
+    .week-chev.open {
+      transform: rotate(180deg)
+    }
+
+    .week-body {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding: 18px 18px 16px
+    }
+
+    .week-body.open {
+      display: block
+    }
+
+    .topic-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .topic-item:last-of-type {
+      border-bottom: none
+    }
+
+    .topic-bullet {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0
+    }
+
+    .topic-name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 3px
+    }
+
+    .topic-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6
+    }
+
+    .week-footer {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    /* PROJECT BOX */
+    .project-box {
+      flex: 1;
+      min-width: 220px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px
+    }
+
+    .project-box .proj-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 5px
+    }
+
+    .project-box .proj-name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px
+    }
+
+    .project-box .proj-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5
+    }
+
+    /* RESOURCES */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+      margin-bottom: 36px
+    }
+
+    .res-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: border-color .2s, background .2s;
+      cursor: pointer
+    }
+
+    .res-card:hover {
+      border-color: var(--border2);
+      background: var(--bg3)
+    }
+
+    .res-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0
+    }
+
+    .res-name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 3px
+    }
+
+    .res-type {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    /* TIP BOX */
+    .tip-box {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 32px;
+      display: flex;
+      gap: 12px
+    }
+
+    .tip-box .tip-icon {
+      font-size: 19px;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .tip-box .tip-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6
+    }
+
+    .tip-box .tip-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 5px
+    }
+
+    /* MARK DONE BTN */
+    .done-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      border: 1.5px solid var(--border2);
+      color: var(--text2);
+      transition: all .2s;
+      font-family: 'Inter', sans-serif
+    }
+
+    .done-btn:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-bg)
+    }
+
+    .done-btn.done {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-bg)
+    }
+
+    /* DASHBOARD */
+    #dashboard {
+      animation: fadeIn .3s ease
+    }
+
+    .dash-hero {
+      margin-bottom: 48px
+    }
+
+    .dash-hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 49px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px
+    }
+
+    .dash-hero h1 span {
+      color: var(--accent)
+    }
+
+    .dash-hero p {
+      font-size: 17px;
+      color: var(--text2);
+      max-width: 500px;
+      line-height: 1.6
+    }
+
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 48px
+    }
+
+    .dash-stat {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .dash-stat::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px
+    }
+
+    .dash-stat.s1::before {
+      background: var(--blue)
+    }
+
+    .dash-stat.s2::before {
+      background: var(--accent)
+    }
+
+    .dash-stat.s3::before {
+      background: var(--green)
+    }
+
+    .dash-stat.s4::before {
+      background: var(--purple)
+    }
+
+    .dash-stat .sv {
+      font-family: 'Outfit', sans-serif;
+      font-size: 29px;
+      font-weight: 800;
+      margin-bottom: 2px
+    }
+
+    .dash-stat .sl {
+      font-size: 13px;
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .phases-overview {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .phase-ov-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s
+    }
+
+    .phase-ov-card:hover {
+      border-color: var(--border2);
+      background: var(--bg3)
+    }
+
+    .phase-ov-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px
+    }
+
+    .phase-ov-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text3)
+    }
+
+    .phase-ov-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      flex: 1
+    }
+
+    .phase-ov-count {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .phase-ov-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 12px
+    }
+
+    .phase-mod-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .phase-mod-chip {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--bg4);
+      color: var(--text3);
+      border: 1px solid var(--border)
+    }
+
+    .phase-mod-chip.done-chip {
+      background: var(--green-bg);
+      color: var(--green);
+      border-color: rgba(76, 175, 125, 0.2)
+    }
+
+    .phase-prog-bar {
+      height: 3px;
+      background: var(--bg4);
+      border-radius: 2px;
+      margin-top: 12px;
+      overflow: hidden
+    }
+
+    .phase-prog-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width .5s
+    }
+
+    /* SEARCH */
+    .search-results {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px
+    }
+
+    .search-result-item {
+      padding: 12px 18px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none
+    }
+
+    .search-result-item:hover {
+      background: var(--bg3)
+    }
+
+    .sr-mod {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text3);
+      width: 60px
+    }
+
+    .sr-name {
+      font-size: 14px;
+      font-weight: 500;
+      flex: 1
+    }
+
+    .sr-phase {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--bg4);
+      color: var(--text3)
+    }
+
+    /* SCROLLBAR */
+    #main::-webkit-scrollbar {
+      width: 0
+    }
+
+    #sidebar-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-right: 12px;
+      color: var(--text);
+    }
+    
+    #sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 98;
+    }
+
+    @media(max-width: 900px) {
+      #sidebar-toggle {
+        display: flex;
+      }
+      #logo-area {
+        width: auto;
+        min-width: auto;
+        border-right: none;
+        padding-right: 10px;
+        padding-left: 15px;
+      }
+      #sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 99;
+      }
+      #sidebar.open {
+        transform: translateX(0);
+      }
+      #sidebar-backdrop.open {
+        display: block;
+      }
+      #main {
+        margin-left: 0;
+        padding: 24px 20px 60px;
+      }
+      #progress-global {
+        display: none;
+      }
+      .dash-hero h1 {
+        font-size: 33px;
+      }
+      .mod-header h1 {
+        font-size: 29px;
+      }
+      .ov-card {
+        padding: 12px 14px;
+      }
+      #header {
+        padding: 0 10px 0 0;
+      }
+      #header-right {
+        padding: 0 10px;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header">
+    <div id="logo-area">
+      <button id="sidebar-toggle" title="Toggle sidebar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <div class="logo-mark">FS</div>
+      <div class="logo-text">Full<span>Stack</span> Path</div>
+    </div>
+    <div id="header-right">
+      <div id="search-wrap">
+        <svg
+          style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round"
+          viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input id="search" placeholder="Search modules…" autocomplete="off">
+      </div>
+      <div id="progress-global">
+        <div class="prog-label"><span>Overall progress</span><span id="prog-pct">0%</span></div>
+        <div id="prog-bar-wrap">
+          <div id="prog-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <button id="theme-btn" title="Toggle theme">
+        <svg id="theme-icon-dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+        <svg id="theme-icon-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" style="display:none">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="sidebar-backdrop"></div>
+  <div id="layout">
+    <nav id="sidebar"></nav>
+    <main id="main">
+      <div id="content-area"></div>
+    </main>
+  </div>
+
+  <script>
+    const DATA = {
+      phases: [
+        {
+          id: 'foundations', label: 'Foundations', num: 1,
+          color: 'var(--blue)', bg: 'var(--blue-bg)',
+          desc: 'Build the baseline knowledge every web developer needs.',
+          modules: [1, 2, 3, 4]
+        },
+        {
+          id: 'frontend', label: 'Frontend Development', num: 2,
+          color: 'var(--accent)', bg: 'var(--accent-bg)',
+          desc: 'Master JavaScript, React, and the modern frontend ecosystem.',
+          modules: [5, 6, 7, 8, 9, 10, 11]
+        },
+        {
+          id: 'backend', label: 'Backend & Databases', num: 3,
+          color: 'var(--purple)', bg: 'var(--purple-bg)',
+          desc: 'Learn server-side development, APIs, and data persistence.',
+          modules: [12, 13, 14, 15, 16, 17, 18, 19, 20]
+        },
+        {
+          id: 'advanced', label: 'Advanced Systems', num: 4,
+          color: 'var(--teal)', bg: 'var(--teal-bg)',
+          desc: 'Caching, real-time communication, security, and deployment.',
+          modules: [21, 22, 23, 24]
+        },
+        {
+          id: 'career', label: 'Career Readiness', num: 5,
+          color: 'var(--coral)', bg: 'var(--coral-bg)',
+          desc: 'Prepare for interviews and land your first full-stack role.',
+          modules: [25]
+        }
+      ],
+      modules: {
+        1: {
+          title: 'Internet Fundamentals', topics: 2, hours: 8, weeks: 1, phase: 'foundations',
+          subtitle: 'Understand how the web actually works before writing a single line of code.',
+          skills: ['HTTP/HTTPS', 'DNS', 'TCP/IP', 'Client-server model', 'Browsers', 'Requests & responses', 'IP addresses', 'Ports & protocols'],
+          tip: 'Developers who skip networking fundamentals struggle to debug real-world issues later. This module is short — do not skip it.',
+          weeks: [
+            {
+              num: 1, title: 'How the internet works', hours: 8, diff: 1, color: 'var(--blue)',
+              topics: [
+                { name: 'HTTP & HTTPS', desc: 'The protocol that powers the web. Learn about request methods (GET, POST, PUT, DELETE), status codes, headers, and why HTTPS matters for security.' },
+                { name: 'DNS resolution', desc: 'How domain names map to IP addresses. The journey from typing a URL to the server responding — resolvers, root servers, TLD servers, authoritative servers.' },
+                { name: 'TCP/IP & the network stack', desc: 'How data travels in packets, the handshake process, and why TCP guarantees delivery while UDP prioritises speed.' },
+                { name: 'How browsers render pages', desc: 'The critical rendering path: HTML parsing → DOM → CSSOM → render tree → layout → paint. Why this matters for performance.' },
+                { name: 'Client-server architecture', desc: 'The fundamental model of the web. Clients request, servers respond. REST is built on this. So is everything you will ever build.' },
+              ],
+              project: { name: 'Network diagram sketch', desc: 'Draw (on paper or a tool like Excalidraw) the full journey of a browser request from URL entry to page display. Include DNS, TCP handshake, HTTP request, and rendering steps.' },
+              resources: [
+                { name: 'MDN — How the web works', url: 'https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works', type: 'Article' },
+                { name: "CS50's Understanding Technology", url: 'https://cs50.harvard.edu/technology/2017/', type: 'Free course' },
+                { name: 'HTTP: The Definitive Guide (free preview)', url: 'https://www.oreilly.com/library/view/http-the-definitive/1565925092/', type: 'Book' },
+              ]
+            }
+          ]
+        },
+        2: {
+          title: 'HTML & CSS', topics: 8, hours: 40, weeks: 4, phase: 'foundations',
+          subtitle: 'Structure and style the web. These are the building blocks of every interface you will ever build.',
+          skills: ['Semantic HTML5', 'Box model', 'Flexbox', 'CSS Grid', 'Selectors', 'Pseudo-classes', 'Media queries', 'CSS custom properties', 'Accessibility basics', 'Forms'],
+          tip: 'Practice by rebuilding real websites from scratch — pick sites you admire and clone them pixel by pixel. It builds muscle memory far faster than tutorials.',
+          weeks: [
+            {
+              num: 1, title: 'HTML structure & semantics', hours: 10, diff: 1, color: 'var(--blue)',
+              topics: [
+                { name: 'Document structure', desc: 'DOCTYPE, html, head, body. Meta tags, title, charset. How the browser parses HTML top-to-bottom.' },
+                { name: 'Semantic elements', desc: 'header, nav, main, article, section, aside, footer. Why semantic HTML matters for accessibility and SEO.' },
+                { name: 'Text, links & images', desc: 'Headings hierarchy, paragraphs, strong/em, anchor tags with href/target, img with alt text and responsive sizing.' },
+                { name: 'Lists & tables', desc: 'ul, ol, li for navigation and content. table, thead, tbody, tr, th, td — when to use tables (tabular data only, not layout).' },
+                { name: 'Forms & inputs', desc: 'form, input types, label, select, textarea, button. The action/method attributes. Accessibility: always associate labels with inputs.' },
+              ],
+              project: { name: 'Personal portfolio skeleton', desc: 'Build the HTML structure (no CSS yet) of a personal portfolio page with a nav, hero section, skills list, projects section, and contact form.' },
+              resources: [
+                { name: 'MDN HTML Guide', url: 'https://developer.mozilla.org/en-US/docs/Learn/HTML', type: 'Docs' },
+                { name: 'HTML.com — Beginner guide', url: 'https://html.com/', type: 'Article' },
+                { name: 'web.dev — Learn HTML', url: 'https://web.dev/learn/html/', type: 'Free course' },
+              ]
+            },
+            {
+              num: 2, title: 'CSS fundamentals & the box model', hours: 10, diff: 2, color: 'var(--blue)',
+              topics: [
+                { name: 'Selectors & specificity', desc: 'Tag, class, ID, attribute, pseudo-class, pseudo-element selectors. The specificity hierarchy and how the cascade resolves conflicts.' },
+                { name: 'The box model', desc: 'content, padding, border, margin. box-sizing: border-box and why it should be your default. display: block vs inline vs inline-block.' },
+                { name: 'Colors, typography & units', desc: 'hex, rgb, hsl, oklch. font-family, font-size, line-height, letter-spacing. px, em, rem, %, vw, vh — when to use each.' },
+                { name: 'Positioning', desc: 'static, relative, absolute, fixed, sticky. The stacking context and z-index. Common layout patterns using position.' },
+                { name: 'CSS custom properties (variables)', desc: '--color-primary: #...; and var(--color-primary). Why variables make theming and maintenance dramatically easier.' },
+              ],
+              project: { name: 'Style the portfolio', desc: 'Add full CSS styling to your Week 1 portfolio skeleton. Typography, colors, spacing. No Flexbox or Grid yet — use only what you learned this week.' },
+              resources: [
+                { name: 'MDN — CSS first steps', url: 'https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps', type: 'Docs' },
+                { name: 'web.dev — Learn CSS', url: 'https://web.dev/learn/css/', type: 'Free course' },
+                { name: 'CSS-Tricks — Box model', url: 'https://css-tricks.com/the-css-box-model/', type: 'Article' },
+              ]
+            },
+            {
+              num: 3, title: 'Flexbox & CSS Grid', hours: 10, diff: 2, color: 'var(--blue)',
+              topics: [
+                { name: 'Flexbox — one-dimensional layout', desc: 'flex-direction, justify-content, align-items, flex-wrap, flex-grow/shrink/basis. Building navbars, card rows, and centred layouts.' },
+                { name: 'CSS Grid — two-dimensional layout', desc: 'grid-template-columns/rows, fr units, grid-gap, grid-column/row span, auto-placement, named grid areas. When Grid beats Flexbox.' },
+                { name: 'Responsive design & media queries', desc: 'Mobile-first approach. min-width breakpoints. Combining Grid and Flexbox for adaptive layouts that work at every viewport size.' },
+                { name: 'Common layout patterns', desc: 'Holy grail layout, card grid, sidebar + content, sticky footer, full-bleed sections. Implement each with both Flexbox and Grid and compare.' },
+              ],
+              project: { name: 'Responsive landing page', desc: 'Build a fully responsive landing page with a sticky nav, hero, 3-column feature grid, testimonial section, and footer. Must look great at 375px and 1440px.' },
+              resources: [
+                { name: 'CSS-Tricks — Flexbox guide', url: 'https://css-tricks.com/snippets/css/a-guide-to-flexbox/', type: 'Reference' },
+                { name: 'CSS-Tricks — Grid guide', url: 'https://css-tricks.com/snippets/css/complete-guide-grid/', type: 'Reference' },
+                { name: 'Flexbox Froggy (game)', url: 'https://flexboxfroggy.com/', type: 'Interactive' },
+                { name: 'Grid Garden (game)', url: 'https://cssgridgarden.com/', type: 'Interactive' },
+              ]
+            },
+            {
+              num: 4, title: 'Animations, transitions & advanced CSS', hours: 10, diff: 3, color: 'var(--blue)',
+              topics: [
+                { name: 'Transitions', desc: 'transition property, duration, timing-function, delay. Hover effects, focus states, smooth color changes. What can and cannot be transitioned performantly.' },
+                { name: 'CSS animations & keyframes', desc: '@keyframes, animation shorthand, fill-mode, iteration-count, play-state. Loading spinners, reveal animations, entrance effects.' },
+                { name: 'CSS transforms', desc: 'translate, scale, rotate, skew, matrix. 3D transforms and perspective. Using transform for GPU-accelerated animations.' },
+                { name: 'Pseudo-elements & advanced selectors', desc: '::before, ::after for decorative content. :not(), :is(), :where(), :has(). Attribute selectors. Writing DRY, maintainable CSS.' },
+              ],
+              project: { name: 'Animated component library', desc: 'Build 5 reusable UI components with CSS only: an animated button, a card hover effect, a loading spinner, a toast notification, and a dropdown menu.' },
+              resources: [
+                { name: 'MDN — CSS animations', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations', type: 'Docs' },
+                { name: 'Animista (animation playground)', url: 'https://animista.net/', type: 'Tool' },
+                { name: 'CSS-Tricks — Transforms', url: 'https://css-tricks.com/almanac/properties/t/transform/', type: 'Article' },
+              ]
+            }
+          ]
+        },
+        3: {
+          title: 'Chrome DevTools', topics: 4, hours: 12, weeks: 1, phase: 'foundations',
+          subtitle: 'The browser is your most powerful development tool. Learn to use it like a professional.',
+          skills: ['Elements panel', 'Console', 'Network tab', 'Performance profiling', 'Source maps', 'Breakpoints', 'Accessibility audit', 'Storage inspection'],
+          tip: 'Spend at least one session just exploring every single panel without a goal. You will discover features that save hours of debugging time.',
+          weeks: [
+            {
+              num: 1, title: 'Mastering the browser developer tools', hours: 12, diff: 2, color: 'var(--blue)',
+              topics: [
+                { name: 'Elements panel', desc: 'Inspect and live-edit HTML and CSS. Force element states (:hover, :focus). Computed styles vs declared styles. The DOM tree and how it differs from source HTML.' },
+                { name: 'Console & JavaScript debugging', desc: 'console methods (log, warn, error, table, group, time). The REPL for live JS execution. Error messages and stack traces. $0, $_, $() shortcuts.' },
+                { name: 'Network panel', desc: 'Watching HTTP requests in real time. Status codes, request/response headers, payload inspection, timing waterfalls, throttling to simulate slow connections.' },
+                { name: 'Performance & Lighthouse', desc: 'Recording performance profiles, identifying long tasks and layout thrashing. Running a Lighthouse audit for performance, accessibility, SEO, and best practices.' },
+              ],
+              project: { name: 'Site audit report', desc: 'Pick any live website, run a full Lighthouse audit, and write a short report of 5 performance or accessibility issues you found and how you would fix them.' },
+              resources: [
+                { name: 'Chrome DevTools official docs', url: 'https://developer.chrome.com/docs/devtools/', type: 'Docs' },
+                { name: 'DevTools Tips (newsletter/site)', url: 'https://devtoolstips.org/', type: 'Reference' },
+              ]
+            }
+          ]
+        },
+        4: {
+          title: 'HTML5/CSS3 Projects', topics: 3, hours: 24, weeks: 2, phase: 'foundations',
+          subtitle: 'Solidify your fundamentals by building real, deployed projects. Hands-on beats tutorials every time.',
+          skills: ['Responsive layouts', 'CSS animations', 'Form design', 'Accessibility', 'Git deployment', 'Cross-browser testing'],
+          tip: 'Deploy every project. Having a live URL you can share is worth ten times more than a local project that nobody can see.',
+          weeks: [
+            {
+              num: 1, title: 'Portfolio site — full build', hours: 12, diff: 2, color: 'var(--blue)',
+              topics: [
+                { name: 'Planning & wireframing', desc: 'Sketch layouts before coding. Decide on sections, content hierarchy, and responsive breakpoints. A clear plan prevents 80% of rework.' },
+                { name: 'Semantic structure', desc: 'Use the correct HTML elements for each section. Nav, main, article, footer. ARIA labels where needed. Run your final page through an accessibility checker.' },
+                { name: 'CSS architecture', desc: 'Organise your CSS with a simple methodology: custom properties at the top, reset, base styles, layout, components, utilities. Maintainability from day one.' },
+                { name: 'Deployment with GitHub Pages', desc: 'Create a repo, push your code, enable GitHub Pages. Your first live site. Add a custom domain if you have one. Understand what CDNs and static hosting mean.' },
+              ],
+              project: { name: 'Personal portfolio site', desc: 'Build and deploy a complete personal portfolio with a bio, skills section, 2–3 project cards, and a working contact form (using Formspree or similar). Deploy to GitHub Pages.' },
+              resources: [
+                { name: 'GitHub Pages docs', url: 'https://pages.github.com/', type: 'Docs' },
+                { name: 'Formspree (form backend)', url: 'https://formspree.io/', type: 'Tool' },
+              ]
+            },
+            {
+              num: 2, title: 'Clone challenge & CSS art', hours: 12, diff: 3, color: 'var(--blue)',
+              topics: [
+                { name: 'Pixel-perfect cloning', desc: 'Pick a real website (Stripe, Linear, Vercel) and clone a single page as accurately as possible. This is the single best way to learn CSS layout skills fast.' },
+                { name: 'CSS-only interactions', desc: 'Build interactive components with zero JavaScript: custom checkbox, accordion, tabs, tooltip, and a hamburger menu — all CSS only.' },
+                { name: 'Dark mode implementation', desc: 'Use prefers-color-scheme media query and CSS custom properties to implement a proper dark mode. Toggle with a class on the root element.' },
+              ],
+              project: { name: 'Website clone', desc: 'Clone the homepage of any professional SaaS website (avoid portfolios — pick something complex). The goal is pixel accuracy. Compare side by side at 1440px and 375px.' },
+              resources: [
+                { name: 'CodePen — CSS examples', url: 'https://codepen.io/', type: 'Playground' },
+                { name: 'Frontend Mentor (challenges)', url: 'https://www.frontendmentor.io/', type: 'Practice' },
+              ]
+            }
+          ]
+        },
+        5: {
+          title: 'JavaScript', topics: 7, hours: 70, weeks: 7, phase: 'frontend',
+          subtitle: 'The language of the web. The most important module in the entire path — take your time here.',
+          skills: ['ES6+', 'Variables & scope', 'Closures', 'Prototypes', 'DOM manipulation', 'Events', 'Async/await', 'Promises', 'Fetch API', 'Error handling', 'Modules', 'Regex'],
+          tip: "JavaScript's async model trips up almost everyone. Build small projects using fetch(), setTimeout, and Promises until the event loop clicks. Do not rush past Week 4.",
+          weeks: [
+            {
+              num: 1, title: 'Core language & environment setup', hours: 10, diff: 1, color: 'var(--accent)',
+              topics: [
+                { name: 'How JavaScript runs', desc: 'The JS engine, browser runtime vs Node.js, interpreted vs compiled. Run your first script in the browser console and via Node.' },
+                { name: 'Variables: var, let, const', desc: 'Scope differences, hoisting behaviour, temporal dead zone with let/const. Why var is mostly avoided in modern code.' },
+                { name: 'Data types & type coercion', desc: 'Primitives (string, number, boolean, null, undefined, symbol, bigint) vs objects. Loose vs strict equality. typeof operator.' },
+                { name: 'Operators & control flow', desc: 'Arithmetic, comparison, logical, ternary. if/else, switch, for, while, for...of, for...in. Break and continue.' },
+                { name: 'Functions: declarations vs expressions', desc: 'Function declarations vs expressions vs arrow functions. Parameters, default values, rest parameters. Return values and early returns.' },
+              ],
+              project: { name: 'CLI tip calculator', desc: 'A Node.js script that takes bill amount and tip percentage as inputs and outputs the total. Covers variables, functions, and basic I/O.' },
+              resources: [
+                { name: 'javascript.info — The Basics', url: 'https://javascript.info/first-steps', type: 'Tutorial' },
+                { name: 'MDN — JS Guide', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide', type: 'Docs' },
+                { name: 'freeCodeCamp JS Algorithms', url: 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/', type: 'Free course' },
+              ]
+            },
+            {
+              num: 2, title: 'Objects, arrays & the DOM', hours: 12, diff: 2, color: 'var(--accent)',
+              topics: [
+                { name: 'Objects & property access', desc: 'Object literals, dot vs bracket notation, computed keys, shorthand properties, object methods, spread and Object.assign.' },
+                { name: 'Arrays & array methods', desc: 'map, filter, reduce, find, findIndex, some, every, flat, flatMap. Immutable patterns. When to use which method.' },
+                { name: 'Destructuring & spread/rest', desc: 'Array and object destructuring, nested destructuring, default values, rest in destructuring, spread for cloning and merging.' },
+                { name: 'DOM manipulation', desc: 'querySelector, createElement, appendChild, innerHTML vs textContent, classList, dataset. Why innerHTML can be a security risk.' },
+                { name: 'Events & event listeners', desc: 'addEventListener, event object, bubbling & capturing, stopPropagation, preventDefault, the event delegation pattern.' },
+              ],
+              project: { name: 'Interactive to-do list', desc: 'DOM-only to-do app (no framework): add, complete, and delete tasks. Uses arrays, DOM manipulation, and event delegation.' },
+              resources: [
+                { name: 'javascript.info — Objects', url: 'https://javascript.info/object', type: 'Tutorial' },
+                { name: 'javascript.info — Arrays', url: 'https://javascript.info/array', type: 'Tutorial' },
+                { name: 'javascript.info — DOM', url: 'https://javascript.info/document', type: 'Tutorial' },
+              ]
+            },
+            {
+              num: 3, title: 'Scope, closures & the prototype chain', hours: 10, diff: 4, color: 'var(--accent)',
+              topics: [
+                { name: 'Lexical scope & scope chain', desc: 'How JavaScript resolves variable names by walking up the scope chain. Block scope vs function scope. The global scope and its dangers.' },
+                { name: 'Closures', desc: 'A function that remembers its outer scope even when called outside it. Uses: data privacy, factory functions, memoisation, loop handlers.' },
+                { name: 'The this keyword', desc: 'Implicit binding, explicit binding (call/apply/bind), new binding, and arrow functions (lexical this). The most confusing concept in JS.' },
+                { name: 'Prototypal inheritance', desc: 'Prototype chain lookup, Object.create, __proto__ vs .prototype, the new keyword. How class syntax maps to prototypes under the hood.' },
+                { name: 'ES6 classes', desc: 'Class declarations, constructors, instance methods, static methods, getters/setters, extends and super, private fields with #.' },
+              ],
+              project: { name: 'Counter factory with closure', desc: 'Implement createCounter() returning increment/decrement/reset. Extend with createLimitedCounter() using private state. Prove the state is truly private.' },
+              resources: [
+                { name: 'javascript.info — Closures', url: 'https://javascript.info/closure', type: 'Tutorial' },
+                { name: "You Don't Know JS — Scope & Closures", url: 'https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/README.md', type: 'Free book' },
+                { name: 'javascript.info — Prototypes', url: 'https://javascript.info/prototypes', type: 'Tutorial' },
+              ]
+            },
+            {
+              num: 4, title: 'Async JS: callbacks, promises & async/await', hours: 14, diff: 5, color: 'var(--accent)',
+              topics: [
+                { name: 'The event loop', desc: 'Call stack, Web APIs, callback queue, microtask queue. Why JS is single-threaded yet non-blocking. How setTimeout(fn, 0) actually works.' },
+                { name: 'Callbacks & callback hell', desc: 'Async patterns before Promises. Why nested callbacks are hard to read. The error-first callback convention from Node.js.' },
+                { name: 'Promises', desc: 'Promise states, .then()/.catch()/.finally(), chaining, Promise.all, Promise.allSettled, Promise.race, Promise.any.' },
+                { name: 'async/await', desc: 'Syntactic sugar over Promises. try/catch for error handling. Sequential vs parallel execution. await inside loops (common pitfall).' },
+                { name: 'fetch API & error handling', desc: "Making HTTP requests. Handling non-200 responses (fetch doesn't throw on 4xx/5xx). Parsing JSON. Loading state patterns." },
+              ],
+              project: { name: 'GitHub profile viewer', desc: 'Fetch a GitHub user by username via the public API. Show avatar, bio, repos, followers. Handle loading, error, and empty states properly.' },
+              resources: [
+                { name: 'javascript.info — Async/await', url: 'https://javascript.info/async-await', type: 'Tutorial' },
+                { name: 'Jake Archibald: In the Loop (video)', url: 'https://www.youtube.com/watch?v=cCOL7MC4Pl0', type: 'Video' },
+                { name: 'MDN — Using Promises', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises', type: 'Docs' },
+              ]
+            },
+            {
+              num: 5, title: 'ES6+ modern features & modules', hours: 8, diff: 2, color: 'var(--accent)',
+              topics: [
+                { name: 'Template literals & tagged templates', desc: 'Multi-line strings, expression interpolation, and tagged template functions for custom string processing.' },
+                { name: 'Symbols & iterators', desc: 'Symbol as a unique primitive. Built-in symbols. Custom iterables and the for...of protocol.' },
+                { name: 'Generators', desc: 'function* syntax, yield, next(). Lazy sequences, infinite iterables, cooperative multitasking.' },
+                { name: 'ES modules: import/export', desc: 'Named exports, default exports, re-exports, dynamic import(). ESM vs CommonJS. Tree-shaking.' },
+                { name: 'Map, Set, WeakMap, WeakSet', desc: 'When Map beats plain objects. Set for unique values. WeakMap for memory-safe caching without preventing garbage collection.' },
+              ],
+              project: { name: 'Utility library', desc: 'Build a mini lodash with named exports: chunk, debounce, throttle, deepClone. Write tests for each. Consume it in a small demo app.' },
+              resources: [
+                { name: 'javascript.info — Generators', url: 'https://javascript.info/generators', type: 'Tutorial' },
+                { name: 'Exploring JS — ES Modules', url: 'https://exploringjs.com/es6/ch_modules.html', type: 'Free book' },
+              ]
+            },
+            {
+              num: 6, title: 'Error handling, debugging & performance', hours: 8, diff: 3, color: 'var(--accent)',
+              topics: [
+                { name: 'Error types & custom errors', desc: 'SyntaxError, TypeError, ReferenceError, RangeError. Extending Error for domain-specific classes: ValidationError, NetworkError.' },
+                { name: 'try/catch/finally patterns', desc: 'Where to place try/catch, re-throwing errors, error boundaries in async code, the finally block for cleanup.' },
+                { name: 'DevTools debugging', desc: 'Breakpoints, step through/into/out, watch expressions, scope panel, conditional breakpoints, logpoints, memory profiling.' },
+                { name: 'Performance patterns', desc: 'Debounce and throttle. Memoisation. Avoiding layout thrashing. requestAnimationFrame for smooth animations.' },
+                { name: 'Regular expressions', desc: 'Character classes, quantifiers, groups, lookaheads. Practical use: input validation, search/replace, parsing.' },
+              ],
+              project: { name: 'Form validator library', desc: 'Reusable validator: required, minLength, maxLength, pattern (regex), custom rules. Custom ValidationError class. 10 unit tests with Jest.' },
+              resources: [
+                { name: 'javascript.info — Error handling', url: 'https://javascript.info/error-handling', type: 'Tutorial' },
+                { name: 'Chrome DevTools docs', url: 'https://developer.chrome.com/docs/devtools/', type: 'Docs' },
+                { name: 'regex101', url: 'https://regex101.com/', type: 'Tool' },
+              ]
+            },
+            {
+              num: 7, title: 'Browser APIs, storage & capstone', hours: 14, diff: 3, color: 'var(--accent)',
+              topics: [
+                { name: 'localStorage & sessionStorage', desc: 'Reading, writing, removing data. JSON serialization. Storage limits and privacy considerations.' },
+                { name: 'History API & routing', desc: 'pushState, replaceState, popstate event. How client-side routing works — the basis of React Router.' },
+                { name: 'Intersection & Mutation observers', desc: 'Efficient visibility detection for lazy loading and infinite scroll. Watching DOM changes without polling.' },
+                { name: 'Web Workers', desc: 'Offloading CPU-intensive tasks to a background thread. postMessage and the message event.' },
+                { name: 'App architecture without frameworks', desc: 'Module organisation, separation of concerns, a simple pub/sub event bus. Patterns that make your code React-ready.' },
+              ],
+              project: { name: 'Vanilla JS SPA (capstone)', desc: 'Single-page app with client-side routing, localStorage persistence, and data from a public API (movie search or weather). Deploy to Netlify.' },
+              resources: [
+                { name: 'javascript.info — Browser APIs', url: 'https://javascript.info/browser-environment', type: 'Tutorial' },
+                { name: 'The Odin Project — JS Path', url: 'https://www.theodinproject.com/paths/full-stack-javascript', type: 'Free course' },
+                { name: 'MDN — Intersection Observer', url: 'https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API', type: 'Docs' },
+              ]
+            }
+          ]
+        },
+        6: {
+          title: 'Package Managers', topics: 3, hours: 8, weeks: 1, phase: 'frontend',
+          subtitle: 'Manage project dependencies professionally. Essential before touching any modern JS toolchain.',
+          skills: ['npm', 'yarn', 'pnpm', 'package.json', 'Semver', 'Scripts', 'Lock files', 'Publishing packages'],
+          tip: 'Read the npm docs on semver — understanding ^ vs ~ prevents silent breaking changes that waste hours of debugging.',
+          weeks: [
+            {
+              num: 1, title: 'npm, yarn & dependency management', hours: 8, diff: 1, color: 'var(--accent)',
+              topics: [
+                { name: 'npm fundamentals', desc: 'npm init, install, uninstall, update. --save-dev for devDependencies. Global vs local packages. Running scripts with npm run.' },
+                { name: 'package.json deep dive', desc: 'name, version, scripts, dependencies, devDependencies, peerDependencies, engines. The scripts field for build, test, dev, and lint commands.' },
+                { name: 'Semver & lock files', desc: 'Major.minor.patch. ^, ~, and exact versions. Why package-lock.json and yarn.lock exist. Committing lock files. npm ci vs npm install.' },
+                { name: 'yarn & pnpm', desc: 'Why yarn was created (speed, determinism). pnpm\'s disk-efficient approach. When to choose which. Workspaces for monorepos.' },
+              ],
+              project: { name: 'npm scripts workflow', desc: 'Set up a project with custom npm scripts for: starting a dev server, running tests, linting with ESLint, and building for production. Document each script in the README.' },
+              resources: [
+                { name: 'npm docs', url: 'https://docs.npmjs.com/', type: 'Docs' },
+                { name: 'yarn docs', url: 'https://yarnpkg.com/getting-started', type: 'Docs' },
+              ]
+            }
+          ]
+        },
+        7: {
+          title: 'Git & GitHub', topics: 5, hours: 16, weeks: 1, phase: 'frontend',
+          subtitle: 'Version control is non-negotiable in professional development. Every line of code you ever write should live in Git.',
+          skills: ['git init', 'Staging & commits', 'Branches', 'Merge & rebase', 'Pull requests', 'Git flow', 'GitHub Actions basics', 'Conflict resolution'],
+          tip: 'Use Git on every project from day one, even solo personal ones. The habit is more important than knowing every command.',
+          weeks: [
+            {
+              num: 1, title: 'Git version control & GitHub workflow', hours: 16, diff: 2, color: 'var(--accent)',
+              topics: [
+                { name: 'Git fundamentals', desc: 'init, add, commit, status, log, diff. Writing good commit messages. The three areas: working directory, staging area, repository.' },
+                { name: 'Branching & merging', desc: 'branch, checkout, merge. Fast-forward vs 3-way merges. Merge conflicts and how to resolve them. Branch naming conventions.' },
+                { name: 'Remote repositories', desc: 'remote, push, pull, fetch, clone. Understanding origin. Tracking branches. Pulling with rebase vs merge.' },
+                { name: 'GitHub pull request workflow', desc: 'Forking vs cloning. Opening a PR, writing a PR description, requesting review, addressing feedback, squash merge.' },
+                { name: 'Git rebase & history rewriting', desc: 'rebase for a clean linear history. Interactive rebase (squash, reword, drop). When to rebase vs merge. Force-push safely.' },
+              ],
+              project: { name: 'Collaborative Git simulation', desc: 'Create a repo, simulate a team workflow: feature branches, PRs, code review comments, merge conflicts, and a release tag. Practice resolving a merge conflict.' },
+              resources: [
+                { name: 'Pro Git book (free)', url: 'https://git-scm.com/book/en/v2', type: 'Free book' },
+                { name: 'GitHub Skills', url: 'https://skills.github.com/', type: 'Interactive' },
+                { name: 'Oh My Git! (game)', url: 'https://ohmygit.org/', type: 'Interactive' },
+              ]
+            }
+          ]
+        },
+        8: {
+          title: 'React.js', topics: 4, hours: 32, weeks: 3, phase: 'frontend',
+          subtitle: 'The most widely-used UI library. Think in components, props, and state — not DOM manipulation.',
+          skills: ['JSX', 'Components', 'Props', 'State', 'Hooks', 'useEffect', 'useRef', 'useMemo', 'useCallback', 'Conditional rendering', 'Lists & keys'],
+          tip: "If you're reaching for document.querySelector inside a React component, stop. React's mental model is fundamentally different — learn to think in data flow.",
+          weeks: [
+            {
+              num: 1, title: 'Components, JSX & props', hours: 10, diff: 2, color: 'var(--accent)',
+              topics: [
+                { name: 'React mental model', desc: 'UI as a function of state. The component tree. Virtual DOM and reconciliation. Why React re-renders and when it does not.' },
+                { name: 'JSX', desc: 'JSX is syntactic sugar for React.createElement. Rules: one root element, className not class, camelCase events, expressions in curly braces.' },
+                { name: 'Functional components & props', desc: 'Components as pure functions. Passing data down with props. Prop types validation. Children prop for composition.' },
+                { name: 'Conditional rendering & lists', desc: '&& operator, ternary, early returns. Rendering arrays with .map(). The key prop — why it must be stable and unique.' },
+              ],
+              project: { name: 'Static component library', desc: 'Build 8 reusable components: Button, Card, Badge, Avatar, Input, Modal, Navbar, Footer. Props only — no state yet. Deploy to CodeSandbox.' },
+              resources: [
+                { name: 'React official docs (new beta)', url: 'https://react.dev/', type: 'Docs' },
+                { name: 'Scrimba — Learn React (free)', url: 'https://scrimba.com/learn/learnreact', type: 'Free course' },
+              ]
+            },
+            {
+              num: 2, title: 'State, events & hooks', hours: 12, diff: 3, color: 'var(--accent)',
+              topics: [
+                { name: 'useState', desc: 'State as a snapshot. The setState update function. State with objects and arrays — why you must not mutate state directly.' },
+                { name: 'Event handling', desc: 'onClick, onChange, onSubmit. Synthetic events. Controlled vs uncontrolled inputs. Lifting state up to the closest common ancestor.' },
+                { name: 'useEffect', desc: 'Side effects after render. The dependency array. Cleanup functions. Common patterns: fetching data, subscriptions, timers.' },
+                { name: 'useRef', desc: 'Accessing DOM nodes directly. Storing mutable values without re-renders. Forwarding refs with forwardRef.' },
+              ],
+              project: { name: 'Interactive quiz app', desc: 'A multi-step quiz: question display, answer selection, score tracking, timer per question, and a results screen. useState + useEffect only.' },
+              resources: [
+                { name: 'react.dev — Adding interactivity', url: 'https://react.dev/learn/adding-interactivity', type: 'Docs' },
+                { name: 'react.dev — Escape hatches (useRef)', url: 'https://react.dev/learn/escape-hatches', type: 'Docs' },
+              ]
+            },
+            {
+              num: 3, title: 'Performance hooks & patterns', hours: 10, diff: 4, color: 'var(--accent)',
+              topics: [
+                { name: 'useMemo & useCallback', desc: 'Memoising expensive computations and stable function references. When these help and when they are premature optimisation.' },
+                { name: 'useReducer', desc: 'Managing complex state logic. The reducer pattern (like a tiny Redux). When useReducer beats useState.' },
+                { name: 'Custom hooks', desc: 'Extracting stateful logic into reusable hooks. useFetch, useLocalStorage, useDebounce, useWindowSize. The rules of hooks.' },
+                { name: 'Component patterns', desc: 'Compound components, render props, higher-order components (historical context). Composition over inheritance.' },
+              ],
+              project: { name: 'Weather dashboard', desc: 'Full React app: city search, current weather + 5-day forecast (OpenWeatherMap API), unit toggle (°C/°F), localStorage for recent searches. Custom useFetch hook.' },
+              resources: [
+                { name: 'react.dev — Performance', url: 'https://react.dev/learn/render-and-commit', type: 'Docs' },
+                { name: 'usehooks.com', url: 'https://usehooks.com/', type: 'Reference' },
+              ]
+            }
+          ]
+        },
+        9: {
+          title: 'React.js Ecosystem', topics: 5, hours: 24, weeks: 2, phase: 'frontend',
+          subtitle: 'Extend React with routing, state management, and data fetching. The combination powers most production apps.',
+          skills: ['React Router', 'Context API', 'Redux Toolkit', 'Zustand', 'TanStack Query', 'React Hook Form', 'Zod validation'],
+          tip: "Don't jump to Redux immediately. Start with Context API and only reach for a state library when you genuinely feel the pain. Over-engineering early is a trap.",
+          weeks: [
+            {
+              num: 1, title: 'Routing & global state', hours: 12, diff: 3, color: 'var(--accent)',
+              topics: [
+                { name: 'React Router v6', desc: 'BrowserRouter, Routes, Route, Link, NavLink, useNavigate, useParams, useSearchParams. Nested routes, protected routes, 404 handling.' },
+                { name: 'Context API', desc: 'createContext, useContext, Provider pattern. When to use context vs prop drilling. Performance implications of context re-renders.' },
+                { name: 'Redux Toolkit', desc: 'configureStore, createSlice, useSelector, useDispatch. Redux DevTools. Async thunks with createAsyncThunk. When Redux is the right choice.' },
+                { name: 'Zustand', desc: 'Minimal global state with a hooks-based API. Compared to Redux: less boilerplate, same power for most use cases.' },
+              ],
+              project: { name: 'Multi-page React app', desc: 'An e-commerce UI with React Router (home, product list, product detail, cart), Zustand for cart state, and a protected checkout route.' },
+              resources: [
+                { name: 'React Router docs', url: 'https://reactrouter.com/en/main', type: 'Docs' },
+                { name: 'Redux Toolkit docs', url: 'https://redux-toolkit.js.org/', type: 'Docs' },
+                { name: 'Zustand docs', url: 'https://zustand-demo.pmnd.rs/', type: 'Docs' },
+              ]
+            },
+            {
+              num: 2, title: 'Data fetching, forms & validation', hours: 12, diff: 3, color: 'var(--accent)',
+              topics: [
+                { name: 'TanStack Query (React Query)', desc: 'useQuery, useMutation, query invalidation, stale-while-revalidate, pagination, infinite queries. Why this replaces useEffect for data fetching.' },
+                { name: 'React Hook Form', desc: 'register, handleSubmit, formState, watch, setValue. Controlled vs uncontrolled approach. Performance advantages.' },
+                { name: 'Zod validation', desc: 'Schema definition, .parse() vs .safeParse(), nested objects, optional fields, custom refinements. Integrating Zod with React Hook Form.' },
+              ],
+              project: { name: 'Full form system', desc: 'A multi-step registration form with React Hook Form + Zod validation, TanStack Query for async username availability check, and server-state synchronisation.' },
+              resources: [
+                { name: 'TanStack Query docs', url: 'https://tanstack.com/query/latest', type: 'Docs' },
+                { name: 'React Hook Form docs', url: 'https://react-hook-form.com/', type: 'Docs' },
+                { name: 'Zod docs', url: 'https://zod.dev/', type: 'Docs' },
+              ]
+            }
+          ]
+        },
+        10: {
+          title: 'Tailwind CSS', topics: 3, hours: 16, weeks: 1, phase: 'frontend',
+          subtitle: 'Utility-first CSS that lets you build custom designs without leaving your HTML. The fastest way to build polished UIs.',
+          skills: ['Utility classes', 'Responsive prefixes', 'Dark mode', 'Hover/focus states', 'Custom config', '@apply directive', 'Tailwind plugins', 'JIT mode'],
+          tip: 'Install the Tailwind CSS IntelliSense VSCode extension immediately. Autocomplete alone saves hours every week and teaches you the class names faster.',
+          weeks: [
+            {
+              num: 1, title: 'Tailwind CSS fundamentals & patterns', hours: 16, diff: 2, color: 'var(--accent)',
+              topics: [
+                { name: 'Core utility classes', desc: 'Spacing (p, m, gap), typography (text, font, leading), colors (bg, text, border), sizing (w, h, max-w), flexbox and grid utilities.' },
+                { name: 'Responsive & state modifiers', desc: 'sm:, md:, lg:, xl: breakpoint prefixes. hover:, focus:, active:, disabled:, group-hover: for interactive states.' },
+                { name: 'Dark mode', desc: 'dark: prefix with class strategy. Toggling with a class on the html element. Combining with CSS custom properties for a full theme system.' },
+                { name: 'Customising the config', desc: 'tailwind.config.js — extending colors, fonts, spacing, adding custom utilities, configuring content paths for purging. Creating a design system.' },
+              ],
+              project: { name: 'Dashboard UI clone', desc: 'Rebuild a professional dashboard UI (find one on Dribbble) using Tailwind only. Must include a sidebar, stats cards, a data table, and a responsive mobile layout.' },
+              resources: [
+                { name: 'Tailwind CSS docs', url: 'https://tailwindcss.com/docs', type: 'Docs' },
+                { name: 'Tailwind UI components (free examples)', url: 'https://tailwindui.com/components', type: 'Reference' },
+                { name: 'Headless UI', url: 'https://headlessui.com/', type: 'Library' },
+              ]
+            }
+          ]
+        },
+        11: {
+          title: 'React.js Projects', topics: 0, hours: 40, weeks: 3, phase: 'frontend',
+          subtitle: 'Apply everything from Modules 5–10 by building substantial, deployed applications. This is your frontend portfolio.',
+          skills: ['Full React apps', 'State management', 'API integration', 'Performance', 'Deployment', 'Error boundaries', 'Testing'],
+          tip: "Deploy every project to Vercel. Having live URLs in your portfolio matters enormously to employers — 'I built it' is half as good as a link they can click.",
+          weeks: [
+            {
+              num: 1, title: 'Task management app', hours: 14, diff: 3, color: 'var(--accent)',
+              topics: [
+                { name: 'Project planning', desc: 'Feature list, component tree design, state shape design, API planning. Spending time here prevents hours of refactoring.' },
+                { name: 'Full feature implementation', desc: 'CRUD operations, drag-and-drop with @dnd-kit, board/list/calendar views, due dates, priority levels, tags, and local persistence.' },
+                { name: 'Testing & polish', desc: 'React Testing Library tests for key interactions. Keyboard navigation. Loading and error states for every async operation.' },
+              ],
+              project: { name: 'Trello-style task manager', desc: 'Full-featured Kanban board with React, Zustand, drag-and-drop, local storage persistence, and a responsive design. Deploy to Vercel.' },
+              resources: [{ name: '@dnd-kit library', url: 'https://dndkit.com/', type: 'Library' }]
+            },
+            {
+              num: 2, title: 'Real-time data dashboard', hours: 13, diff: 4, color: 'var(--accent)',
+              topics: [
+                { name: 'Data visualisation with Recharts', desc: 'LineChart, BarChart, AreaChart, PieChart. Responsive containers. Custom tooltips and legends. Animating chart updates.' },
+                { name: 'Real-time updates', desc: 'Polling with TanStack Query refetchInterval. Server-Sent Events. Optimistic UI updates. Skeleton loading states.' },
+                { name: 'Complex filtering & sorting', desc: 'URL-based filter state with useSearchParams. Debounced search. Multi-column sorting. Pagination vs infinite scroll.' },
+              ],
+              project: { name: 'Analytics dashboard', desc: 'A real-time analytics dashboard fetching from a public API (GitHub, CoinGecko, or similar). Charts, filters, date range picker, dark mode. Deploy to Vercel.' },
+              resources: [{ name: 'Recharts docs', url: 'https://recharts.org/', type: 'Library' }]
+            },
+            {
+              num: 3, title: 'Full e-commerce UI', hours: 13, diff: 4, color: 'var(--accent)',
+              topics: [
+                { name: 'Multi-page architecture', desc: 'React Router with nested routes, layout routes, and code splitting with lazy(). Optimising bundle size and initial load.' },
+                { name: 'Cart & checkout flow', desc: 'Cart state with Zustand. Multi-step checkout form with React Hook Form + Zod. Order summary, address, payment (mock). Success state.' },
+                { name: 'Authentication UI', desc: 'Login/signup forms, protected routes, token storage strategy, session persistence, logout flow. Mock authentication without a real backend.' },
+              ],
+              project: { name: 'E-commerce storefront', desc: 'Complete storefront: product listing with filters, product detail, cart, checkout flow, user auth (mocked), and an order confirmation screen. Deploy to Vercel.' },
+              resources: [{ name: 'Fake Store API', url: 'https://fakestoreapi.com/', type: 'API' }]
+            }
+          ]
+        },
+        12: {
+          title: 'Testing', topics: 3, hours: 16, weeks: 1, phase: 'backend',
+          subtitle: 'Write software you can trust. Testing is what separates junior developers from professionals.',
+          skills: ['Unit testing', 'Integration testing', 'Jest', 'React Testing Library', 'Test coverage', 'Mocking', 'TDD basics', 'Vitest'],
+          tip: 'Write tests for your existing React projects before moving on. Retrofitting tests teaches you exactly what makes code testable — which makes you write better code..',
+          weeks: [
+            {
+              num: 1, title: 'Testing fundamentals & practice', hours: 16, diff: 3, color: 'var(--purple)',
+              topics: [
+                { name: 'The testing pyramid', desc: 'Unit tests (fast, isolated, many), integration tests (moderate), e2e tests (slow, few). What to test and why over-testing is a trap.' },
+                { name: 'Jest fundamentals', desc: 'describe, it/test, expect, matchers (toBe, toEqual, toContain, toThrow). beforeEach/afterEach setup. Mocking with jest.fn() and jest.spyOn.' },
+                { name: 'React Testing Library', desc: 'Render, screen queries (getByRole, getByText, findBy). User events with userEvent. Testing behaviour, not implementation. Accessibility-first queries.' },
+                { name: 'Mocking & async tests', desc: 'Mocking fetch and APIs with msw (Mock Service Worker). Testing async component states: loading, error, success. Waiting with findBy.' },
+              ],
+              project: { name: 'Tested component suite', desc: 'Write full test coverage for 3 of your React components: a form (validation, submission), a data-fetching component (loading/error/success), and a stateful counter.' },
+              resources: [
+                { name: 'Jest docs', url: 'https://jestjs.io/', type: 'Docs' },
+                { name: 'React Testing Library docs', url: 'https://testing-library.com/docs/react-testing-library/intro/', type: 'Docs' },
+                { name: 'MSW docs', url: 'https://mswjs.io/', type: 'Docs' },
+              ]
+            }
+          ]
+        },
+        13: {
+          title: 'Linux Fundamentals', topics: 3, hours: 16, weeks: 1, phase: 'backend',
+          subtitle: "Most servers run Linux. You need to be comfortable in the terminal to deploy, debug, and maintain real applications.",
+          skills: ['Shell navigation', 'File permissions', 'SSH', 'Processes', 'Package management', 'Shell scripting', 'cron jobs', 'grep & find', 'Pipes & redirection'],
+          tip: 'Use the terminal for everything for one week: open files, move them, install software. Daily use builds fluency faster than any course.',
+          weeks: [
+            {
+              num: 1, title: 'Linux command line & server basics', hours: 16, diff: 2, color: 'var(--purple)',
+              topics: [
+                { name: 'Filesystem navigation', desc: 'pwd, ls, cd, mkdir, rmdir, touch, cp, mv, rm. File paths: absolute vs relative. Hidden files. The home directory and ~ shorthand.' },
+                { name: 'File permissions & ownership', desc: 'chmod, chown, chgrp. The permission model: owner/group/other. rwx in octal and symbolic notation. sudo and the root user.' },
+                { name: 'Processes & system info', desc: 'ps, top, htop, kill, pkill. Background processes with &. nohup. Checking disk usage with df and du. System info with uname and lscpu.' },
+                { name: 'SSH & remote servers', desc: 'ssh user@host, key-based authentication, ssh-keygen, ~/.ssh/config. scp and rsync for file transfer. Keeping sessions alive with tmux or screen.' },
+                { name: 'Shell scripting basics', desc: '#!/bin/bash shebang, variables, if/else, for loops, functions, exit codes. Writing a deployment script that pulls a repo and restarts a service.' },
+              ],
+              project: { name: 'Server setup script', desc: 'Write a bash script that sets up a fresh Ubuntu server: updates packages, installs Node.js, creates a non-root user, configures SSH key auth, and sets up a basic firewall with ufw.' },
+              resources: [
+                { name: 'The Linux Command Line (free PDF)', url: 'https://linuxcommand.org/tlcl.php', type: 'Free book' },
+                { name: 'OverTheWire: Bandit (wargame)', url: 'https://overthewire.org/wargames/bandit/', type: 'Interactive' },
+              ]
+            }
+          ]
+        },
+        14: {
+          title: 'Node.js Basics', topics: 3, hours: 24, weeks: 2, phase: 'backend',
+          subtitle: 'Run JavaScript on the server. Understand the event-driven architecture that makes Node fast and scalable.',
+          skills: ['Event loop', 'CommonJS modules', 'ESM', 'File system', 'Streams', 'HTTP module', 'Express.js', 'Middleware', 'Environment variables', 'npm scripts'],
+          tip: 'Re-build one of your earlier projects\' backend from scratch in Node — having real context makes every concept stick immediately.',
+          weeks: [
+            {
+              num: 1, title: 'Node.js core & HTTP servers', hours: 12, diff: 3, color: 'var(--purple)',
+              topics: [
+                { name: "Node.js architecture", desc: 'Event-driven, non-blocking I/O. The event loop in Node vs the browser. Worker threads. Why Node is great for I/O-bound work and where it struggles.' },
+                { name: 'Module system', desc: 'CommonJS (require/module.exports) vs ESM (import/export). The module resolution algorithm. Built-in modules: path, os, events, util.' },
+                { name: 'File system API', desc: 'fs.readFile, writeFile, appendFile, unlink. Synchronous vs async vs streams. Reading a directory. Watching files for changes with fs.watch.' },
+                { name: 'Building an HTTP server', desc: 'The http module. req and res objects. Routing manually. Handling different content types. Why this is the foundation Express is built on.' },
+              ],
+              project: { name: 'File-based REST API', desc: 'Build an HTTP server with Node\'s built-in http module (no Express) that reads/writes JSON files as a database. Implement full CRUD for a "notes" resource.' },
+              resources: [
+                { name: 'Node.js official docs', url: 'https://nodejs.org/en/docs/', type: 'Docs' },
+                { name: 'Node.js best practices', url: 'https://github.com/goldbergyoni/nodebestpractices', type: 'Reference' },
+              ]
+            },
+            {
+              num: 2, title: 'Express.js framework', hours: 12, diff: 3, color: 'var(--purple)',
+              topics: [
+                { name: 'Express fundamentals', desc: 'app.use, app.get/post/put/delete, route parameters, query strings. The request/response cycle. express.Router for modular routing.' },
+                { name: 'Middleware', desc: 'The middleware stack. Built-in middleware (express.json, express.static). Third-party (cors, morgan, helmet). Writing custom middleware for auth and logging.' },
+                { name: 'Error handling', desc: 'Express error-handling middleware (4 arguments). Centralised error handling. Async error propagation with next(err). Creating an AppError class.' },
+                { name: 'Environment & configuration', desc: 'dotenv for environment variables. Never commit .env files. Config modules for different environments (development, production, test).' },
+              ],
+              project: { name: 'Express REST API', desc: 'Build a full CRUD Express API for a "recipes" resource. JSON file storage, input validation with Joi or express-validator, error handling middleware, and Postman tests.' },
+              resources: [
+                { name: 'Express.js docs', url: 'https://expressjs.com/', type: 'Docs' },
+                { name: 'The Odin Project — NodeJS', url: 'https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs', type: 'Free course' },
+              ]
+            }
+          ]
+        },
+        15: {
+          title: 'TypeScript', topics: 2, hours: 20, weeks: 2, phase: 'backend',
+          subtitle: 'Add static typing to JavaScript. TypeScript is now the default for professional JavaScript projects.',
+          skills: ['Type annotations', 'Interfaces', 'Type aliases', 'Generics', 'Union & intersection types', 'Narrowing', 'Utility types', 'tsconfig', 'Declaration files'],
+          tip: "Never use any. If you're reaching for it, that's a sign to study the specific TypeScript feature you need instead. any defeats the entire purpose.",
+          weeks: [
+            {
+              num: 1, title: 'TypeScript fundamentals', hours: 10, diff: 3, color: 'var(--purple)',
+              topics: [
+                { name: 'Type annotations & inference', desc: 'Annotating variables, parameters, and return types. When TypeScript infers correctly vs when to annotate explicitly. The : never type.' },
+                { name: 'Interfaces & type aliases', desc: 'interface vs type — when to use each. Extending interfaces. Intersection types. Index signatures. Readonly and optional properties.' },
+                { name: 'Union types & narrowing', desc: 'string | number, discriminated unions, typeof narrowing, instanceof narrowing, in operator. Exhaustive checks with never.' },
+                { name: 'Generics', desc: '<T> type parameters. Generic functions, interfaces, and classes. Constraints with extends. Built-in generics: Array<T>, Promise<T>, Record<K,V>.' },
+              ],
+              project: { name: 'Typed utility library', desc: 'Rewrite your JavaScript utility library from Module 5 in TypeScript. Add full type safety to debounce, throttle, deepClone, and chunk. No any allowed.' },
+              resources: [
+                { name: 'TypeScript official docs', url: 'https://www.typescriptlang.org/docs/', type: 'Docs' },
+                { name: 'Total TypeScript (free exercises)', url: 'https://www.totaltypescript.com/tutorials', type: 'Free course' },
+              ]
+            },
+            {
+              num: 2, title: 'TypeScript with React & Node', hours: 10, diff: 4, color: 'var(--purple)',
+              topics: [
+                { name: 'TypeScript in React', desc: 'Typing props with interfaces. FC<Props> vs plain function. Typing useState, useRef, useCallback. Typing event handlers (React.ChangeEvent<HTMLInputElement>).' },
+                { name: 'TypeScript in Express', desc: 'Typing req, res, next. Extending the Request interface for authentication data. Typing async route handlers. Typed environment variables.' },
+                { name: 'Utility types', desc: 'Partial<T>, Required<T>, Pick<T,K>, Omit<T,K>, Readonly<T>, ReturnType<T>, Parameters<T>. Building your own utility types.' },
+                { name: 'tsconfig deep dive', desc: 'target, module, strict (and what it enables), paths for module aliases, baseUrl, include/exclude. Separate configs for different build targets.' },
+              ],
+              project: { name: 'Full-stack TypeScript', desc: 'Add TypeScript to your Express API from Module 14. Typed routes, typed models, shared types between frontend and backend in a types/ directory.' },
+              resources: [
+                { name: 'React TypeScript cheatsheet', url: 'https://react-typescript-cheatsheet.netlify.app/', type: 'Reference' },
+              ]
+            }
+          ]
+        },
+        16: {
+          title: 'JavaScript Under The Hood', topics: 6, hours: 20, weeks: 2, phase: 'backend',
+          subtitle: 'Deep-dive into how JavaScript actually executes. This is what separates mid-level developers from seniors.',
+          skills: ['V8 engine', 'Call stack & heap', 'Event loop internals', 'Garbage collection', 'Hidden classes', 'JIT compilation', 'Memory leaks', 'Prototype chain internals'],
+          tip: 'This knowledge makes performance bugs solvable. Senior engineers command higher salaries partly because they can debug problems that others cannot explain.',
+          weeks: [
+            {
+              num: 1, title: 'The execution model', hours: 10, diff: 5, color: 'var(--purple)',
+              topics: [
+                { name: 'The V8 engine', desc: 'Parsing, abstract syntax trees, Ignition interpreter, TurboFan optimising compiler. JIT compilation. What makes JavaScript fast in 2024.' },
+                { name: 'Memory: stack vs heap', desc: 'Primitive values on the stack, objects on the heap. Memory allocation and deallocation. The garbage collector (mark-and-sweep). What causes memory leaks.' },
+                { name: 'The event loop in depth', desc: 'Call stack, Web APIs, macrotask queue, microtask queue, rendering pipeline. Exact execution order. Why microtasks (Promises) run before setTimeout.' },
+                { name: 'Hidden classes & inline caching', desc: 'How V8 optimises property access. Why adding properties in a consistent order matters. Deoptimisation triggers and how to avoid them.' },
+              ],
+              project: { name: 'Memory leak detective', desc: 'Using Chrome DevTools Memory tab, identify and fix 3 memory leaks: an event listener leak, a closure-based leak, and a detached DOM node leak. Document each finding.' },
+              resources: [
+                { name: 'V8 blog', url: 'https://v8.dev/blog', type: 'Technical blog' },
+                { name: 'What the heck is the event loop (video)', url: 'https://www.youtube.com/watch?v=8aGhZQkoFbQ', type: 'Video' },
+              ]
+            },
+            {
+              num: 2, title: 'Performance, security & internals', hours: 10, diff: 5, color: 'var(--purple)',
+              topics: [
+                { name: 'Prototypes under the hood', desc: 'How prototype chain lookup works at the engine level. Property shadowing. __proto__ vs Object.getPrototypeOf. Object.create(null) for clean maps.' },
+                { name: 'Generators & iterators internals', desc: 'How generators suspend and resume execution. The iterator protocol at the engine level. Async generators for streaming data.' },
+                { name: 'Tail call optimisation', desc: 'What it is, which engines implement it, and why it matters for recursive functions. Writing stack-safe recursion with trampolining.' },
+                { name: 'Security: XSS & prototype pollution', desc: 'How Cross-Site Scripting exploits innerHTML. Prototype pollution attacks. Safe JSON parsing. Content Security Policy from a JS perspective.' },
+              ],
+              project: { name: 'Performance optimisation', desc: 'Take one of your existing React apps and reduce its bundle size by 30% and improve Lighthouse performance score to 90+. Document every optimisation with before/after measurements.' },
+              resources: [
+                { name: "You Don't Know JS — Types & Grammar", url: 'https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/types-grammar/README.md', type: 'Free book' },
+              ]
+            }
+          ]
+        },
+        17: {
+          title: 'API Development', topics: 3, hours: 24, weeks: 2, phase: 'backend',
+          subtitle: 'Design and build professional REST APIs. The interface between your frontend and backend.',
+          skills: ['REST principles', 'HTTP methods & status codes', 'JWT authentication', 'Middleware', 'Input validation', 'Rate limiting', 'OpenAPI/Swagger', 'API versioning'],
+          tip: 'Build a complete CRUD API with authentication before adding a database. It makes the database layer feel purposeful when you add it in Module 18.',
+          weeks: [
+            {
+              num: 1, title: 'REST API design & authentication', hours: 12, diff: 3, color: 'var(--purple)',
+              topics: [
+                { name: 'REST principles', desc: 'Resources, URIs, HTTP verbs (GET/POST/PUT/PATCH/DELETE), statelessness, HATEOAS basics. Designing clean, predictable API endpoints.' },
+                { name: 'HTTP status codes', desc: '2xx (success), 3xx (redirect), 4xx (client error), 5xx (server error). Using the right code for every situation. The difference between 400, 401, 403, 404, 422.' },
+                { name: 'JWT authentication', desc: 'Token structure (header.payload.signature). Signing with jsonwebtoken. Refresh tokens. Secure storage strategy. The Bearer token pattern.' },
+                { name: 'Input validation & sanitisation', desc: 'Never trust user input. Validation with Zod or express-validator. Sanitising to prevent XSS in stored data. Structured error responses.' },
+              ],
+              project: { name: 'Auth API', desc: 'Build an Express API with full authentication: register, login, logout, refresh token, protected routes middleware. In-memory user store (no DB yet). Tested with Postman/Thunder Client.' },
+              resources: [
+                { name: 'REST API Design Best Practices', url: 'https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/', type: 'Article' },
+                { name: 'jsonwebtoken docs', url: 'https://github.com/auth0/node-jsonwebtoken', type: 'Docs' },
+              ]
+            },
+            {
+              num: 2, title: 'Advanced API patterns', hours: 12, diff: 4, color: 'var(--purple)',
+              topics: [
+                { name: 'Rate limiting & security headers', desc: 'express-rate-limit to prevent abuse. Helmet.js for security headers. CORS configuration. Preventing enumeration attacks on auth endpoints.' },
+                { name: 'OpenAPI / Swagger documentation', desc: 'Writing an openapi.yaml spec. swagger-ui-express to serve interactive docs. Why API documentation matters and how to keep it in sync with code.' },
+                { name: 'API versioning', desc: 'URL versioning (/api/v1/), header versioning. When and why to version. Handling breaking changes. Deprecation strategies.' },
+              ],
+              project: { name: 'Documented REST API', desc: 'Add rate limiting, security headers, and full Swagger documentation to your auth API. The Swagger UI should show every endpoint with request/response schemas.' },
+              resources: [
+                { name: 'Swagger / OpenAPI docs', url: 'https://swagger.io/docs/', type: 'Docs' },
+                { name: 'express-rate-limit', url: 'https://github.com/express-rate-limit/express-rate-limit', type: 'Library' },
+              ]
+            }
+          ]
+        },
+        18: {
+          title: 'PostgreSQL', topics: 3, hours: 24, weeks: 2, phase: 'backend',
+          subtitle: 'The most powerful open-source relational database. SQL is a skill you will use your entire career.',
+          skills: ['SQL fundamentals', 'Joins', 'Aggregations', 'Indexes', 'Transactions', 'ACID properties', 'Prisma ORM', 'Database design', 'Migrations', 'Connection pooling'],
+          tip: 'Write raw SQL first — understand every query — then introduce an ORM. Knowing what the ORM generates makes you a dramatically better debugger.',
+          weeks: [
+            {
+              num: 1, title: 'SQL & database design', hours: 12, diff: 3, color: 'var(--purple)',
+              topics: [
+                { name: 'SQL fundamentals', desc: 'SELECT, INSERT, UPDATE, DELETE. WHERE, ORDER BY, LIMIT, OFFSET. Filtering with AND/OR/NOT. NULL handling with IS NULL.' },
+                { name: 'Joins', desc: 'INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN. Self-joins. When to use each. N+1 problem and how joins solve it.' },
+                { name: 'Aggregations & window functions', desc: 'GROUP BY, HAVING, COUNT, SUM, AVG, MIN, MAX. Window functions: ROW_NUMBER, RANK, LAG, LEAD, SUM OVER. Practical analytics queries.' },
+                { name: 'Database design & normalisation', desc: 'Primary and foreign keys. 1NF, 2NF, 3NF. When to denormalise for performance. Entity-relationship diagrams. Choosing data types correctly.' },
+              ],
+              project: { name: 'Schema design & queries', desc: 'Design and implement the database for a social media app: users, posts, comments, likes, follows. Write 15 realistic SQL queries covering joins, aggregations, and window functions.' },
+              resources: [
+                { name: 'PostgreSQL official docs', url: 'https://www.postgresql.org/docs/', type: 'Docs' },
+                { name: 'SQLZoo (interactive SQL)', url: 'https://sqlzoo.net/', type: 'Interactive' },
+                { name: 'Use The Index, Luke', url: 'https://use-the-index-luke.com/', type: 'Free book' },
+              ]
+            },
+            {
+              num: 2, title: 'Performance, transactions & Prisma ORM', hours: 12, diff: 4, color: 'var(--purple)',
+              topics: [
+                { name: 'Indexes', desc: 'B-tree indexes, partial indexes, composite indexes. Using EXPLAIN ANALYZE. When indexes help vs hurt. Index maintenance cost.' },
+                { name: 'Transactions & ACID', desc: 'BEGIN/COMMIT/ROLLBACK. Atomicity, Consistency, Isolation, Durability. Isolation levels. Deadlocks and how to avoid them.' },
+                { name: 'Prisma ORM', desc: 'Schema.prisma, data modelling, prisma migrate, prisma generate. CRUD operations. Relation queries. Raw SQL with prisma.$queryRaw.' },
+                { name: 'Connection pooling', desc: 'Why connection pools matter in production. PgBouncer. Connection limits. Using DATABASE_URL with Prisma in serverless environments.' },
+              ],
+              project: { name: 'API + PostgreSQL integration', desc: 'Connect your Module 17 API to PostgreSQL via Prisma. Replace the in-memory store with real database persistence. Add a migration for a schema change. Deploy to Railway or Render.' },
+              resources: [
+                { name: 'Prisma docs', url: 'https://www.prisma.io/docs/', type: 'Docs' },
+                { name: 'Railway (free Postgres hosting)', url: 'https://railway.app/', type: 'Tool' },
+              ]
+            }
+          ]
+        },
+        19: {
+          title: 'Next.js 14', topics: 5, hours: 32, weeks: 3, phase: 'backend',
+          subtitle: 'The production React framework. Full-stack in a single codebase. Powers some of the largest sites on the web.',
+          skills: ['App Router', 'React Server Components', 'Server Actions', 'SSR', 'SSG', 'ISR', 'API routes', 'next/image', 'Middleware', 'Deployment to Vercel'],
+          tip: 'Start a side project in Next.js immediately — the best way to internalise the App Router is to feel the performance difference compared to a pure client-side React app.',
+          weeks: [
+            {
+              num: 1, title: 'App Router & file-based routing', hours: 10, diff: 3, color: 'var(--purple)',
+              topics: [
+                { name: 'Next.js mental model', desc: 'Pages vs App Router. File-based routing with the app/ directory. layout.tsx, page.tsx, loading.tsx, error.tsx, not-found.tsx — the file conventions.' },
+                { name: 'React Server Components', desc: 'Server components run on the server only — no JS sent to the client. Client components with "use client". When to use each. The component tree mental model.' },
+                { name: 'Data fetching in Next.js', desc: 'async/await directly in Server Components. fetch with cache options. Parallel fetching. Streaming with Suspense. Waterfall prevention.' },
+                { name: 'Layouts & nested routing', desc: 'Shared layouts that persist across navigation. Route groups with (parentheses). Dynamic segments with [slug]. Parallel and intercepted routes.' },
+              ],
+              project: { name: 'Blog with App Router', desc: 'Build a blog with Next.js App Router: home page listing posts, individual post pages with dynamic routes, a shared layout with navigation. Data from MDX files.' },
+              resources: [
+                { name: 'Next.js 14 docs', url: 'https://nextjs.org/docs', type: 'Docs' },
+                { name: 'Next.js official tutorial', url: 'https://nextjs.org/learn', type: 'Free course' },
+              ]
+            },
+            {
+              num: 2, title: 'Server Actions & data mutations', hours: 12, diff: 4, color: 'var(--purple)',
+              topics: [
+                { name: 'Server Actions', desc: '"use server" directive. Form submissions that call server-side functions directly. useFormState and useFormStatus. Progressive enhancement.' },
+                { name: 'Rendering strategies', desc: 'Static Site Generation (SSG), Server-Side Rendering (SSR), Incremental Static Regeneration (ISR), Partial Prerendering (PPR). Choosing the right strategy.' },
+                { name: 'next/image & optimisation', desc: 'Automatic image optimisation, lazy loading, blur placeholder, remote patterns. Core Web Vitals impact. next/font for zero layout shift fonts.' },
+                { name: 'Middleware', desc: 'middleware.ts for auth guards, redirects, A/B testing, geolocation. Matching specific paths. The Edge Runtime.' },
+              ],
+              project: { name: 'Full-stack CRUD app', desc: 'A Next.js app with Server Actions for creating, updating, and deleting records. Server-side form validation, optimistic updates, and revalidatePath. PostgreSQL via Prisma.' },
+              resources: [
+                { name: 'Next.js Server Actions docs', url: 'https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations', type: 'Docs' },
+              ]
+            },
+            {
+              num: 3, title: 'Authentication & production deployment', hours: 10, diff: 4, color: 'var(--purple)',
+              topics: [
+                { name: 'NextAuth.js (Auth.js v5)', desc: 'OAuth providers (GitHub, Google), credential auth, session management, JWT vs database sessions, protecting routes with middleware.' },
+                { name: 'Caching in Next.js', desc: 'Router cache, full route cache, data cache, request memoisation. cache() function, unstable_cache. When to opt out with no-store.' },
+                { name: 'Deployment to Vercel', desc: 'Connecting a GitHub repo, environment variables, preview deployments, custom domains, analytics. Understanding serverless and Edge functions.' },
+              ],
+              project: { name: 'Next.js SaaS starter', desc: 'A complete Next.js app with GitHub OAuth via NextAuth, protected dashboard, user-specific data via Prisma + PostgreSQL, Stripe payment link, and production deployment on Vercel.' },
+              resources: [
+                { name: 'Auth.js docs', url: 'https://authjs.dev/', type: 'Docs' },
+                { name: 'Vercel docs', url: 'https://vercel.com/docs', type: 'Docs' },
+              ]
+            }
+          ]
+        },
+        20: {
+          title: 'Backend Projects', topics: 0, hours: 48, weeks: 3, phase: 'backend',
+          subtitle: 'Build complete, production-grade backend systems. This is the most valuable section of your portfolio.',
+          skills: ['System design', 'API design', 'Database modelling', 'Authentication', 'File uploads', 'Background jobs', 'Deployment', 'Documentation'],
+          tip: 'A live, working full-stack project does more for your job search than a dozen tutorials. Prioritise deployed projects with real URLs.',
+          weeks: [
+            {
+              num: 1, title: 'Full authentication system', hours: 16, diff: 4, color: 'var(--purple)',
+              topics: [
+                { name: 'Complete auth flow', desc: 'Registration, login, email verification, password reset, refresh tokens, logout (token blacklist). Both username/password and OAuth.' },
+                { name: 'Role-based access control', desc: 'User roles (admin, editor, viewer). Middleware for role checking. Resource-level permissions. Audit logging for sensitive operations.' },
+              ],
+              project: { name: 'Auth microservice', desc: 'A standalone authentication service: JWT + refresh tokens, email verification via Nodemailer, password reset flow, Google OAuth, rate limiting on auth endpoints, and full Swagger docs.' },
+              resources: [{ name: 'Nodemailer docs', url: 'https://nodemailer.com/', type: 'Docs' }]
+            },
+            {
+              num: 2, title: 'Full-stack Next.js application', hours: 16, diff: 5, color: 'var(--purple)',
+              topics: [
+                { name: 'Feature planning', desc: 'Choose a real problem to solve. Write a spec: user stories, data model, API contract, component tree. A good spec prevents 60% of rework.' },
+                { name: 'End-to-end implementation', desc: 'Next.js frontend + Server Actions + PostgreSQL + authentication + file uploads to S3/Cloudflare R2 + image processing.' },
+              ],
+              project: { name: 'SaaS app of your choice', desc: 'Build something you would actually use. Examples: expense tracker with receipts, job application tracker, recipe manager with meal planning. Full stack, deployed, with auth.' },
+              resources: []
+            },
+            {
+              num: 3, title: 'Deployed production service', hours: 16, diff: 5, color: 'var(--purple)',
+              topics: [
+                { name: 'Production hardening', desc: 'Environment management, secrets management, health check endpoints, graceful shutdown, process management with PM2.' },
+                { name: 'Monitoring & logging', desc: 'Structured logging with Pino or Winston. Error tracking with Sentry. Uptime monitoring. Setting up alerts for production errors.' },
+              ],
+              project: { name: 'Deployed & monitored API', desc: 'Deploy your full-stack app to a VPS (DigitalOcean or Hetzner) with nginx as a reverse proxy, SSL via Certbot, PM2 for process management, Sentry for error tracking, and automated backups.' },
+              resources: [{ name: 'PM2 docs', url: 'https://pm2.keymetrics.io/', type: 'Docs' }, { name: 'Sentry docs', url: 'https://docs.sentry.io/', type: 'Docs' }]
+            }
+          ]
+        },
+        21: {
+          title: 'Redis', topics: 2, hours: 12, weeks: 1, phase: 'advanced',
+          subtitle: 'An in-memory data store for caching, sessions, and real-time features. Makes slow applications fast.',
+          skills: ['Key-value storage', 'Strings', 'Hashes', 'Lists', 'Sets', 'Sorted sets', 'TTL & expiry', 'Pub/sub', 'Caching patterns', 'Session storage'],
+          tip: 'Add Redis caching to one of your existing APIs and measure the latency before and after. The difference is motivating and educational.',
+          weeks: [
+            {
+              num: 1, title: 'Redis fundamentals & caching', hours: 12, diff: 3, color: 'var(--teal)',
+              topics: [
+                { name: 'Redis data structures', desc: 'Strings (GET/SET/INCR), Hashes (HGET/HSET), Lists (LPUSH/RPOP), Sets (SADD/SMEMBERS), Sorted Sets (ZADD/ZRANGE). Choosing the right structure.' },
+                { name: 'TTL & expiry patterns', desc: 'EXPIRE, EXPIREAT, TTL, PERSIST. Cache-aside pattern. Write-through vs write-back caching. Handling cache invalidation.' },
+                { name: 'Pub/sub messaging', desc: 'SUBSCRIBE, PUBLISH, UNSUBSCRIBE. Using Redis as a lightweight message broker. Limitations vs proper message queues.' },
+                { name: 'Redis in Node.js', desc: 'ioredis and node-redis clients. Connection management. Pipelining for batch operations. Redis Streams for event sourcing basics.' },
+              ],
+              project: { name: 'API caching layer', desc: 'Add Redis caching to your Express API: cache expensive database queries with a 5-minute TTL, use Redis for session storage, implement a rate limiter backed by Redis INCR.' },
+              resources: [
+                { name: 'Redis official docs', url: 'https://redis.io/docs/', type: 'Docs' },
+                { name: 'Redis University (free)', url: 'https://university.redis.com/', type: 'Free course' },
+              ]
+            }
+          ]
+        },
+        22: {
+          title: 'WebSockets', topics: 3, hours: 16, weeks: 1, phase: 'advanced',
+          subtitle: 'Enable real-time bidirectional communication. The foundation of chat apps, live collaboration, and real-time dashboards.',
+          skills: ['WebSocket protocol', 'Socket.io', 'Rooms & namespaces', 'Broadcasting', 'Reconnection', 'Scaling with Redis adapter', 'Presence indicators'],
+          tip: "Build a chat app — it's the 'Hello World' of WebSockets, surprisingly fun to demo, and teaches you every important pattern in one project.",
+          weeks: [
+            {
+              num: 1, title: 'Real-time communication with WebSockets', hours: 16, diff: 3, color: 'var(--teal)',
+              topics: [
+                { name: 'WebSocket protocol', desc: 'The HTTP upgrade handshake. Full-duplex communication. Frames and opcodes. Why WebSockets vs SSE vs long polling — and when to use each.' },
+                { name: 'Socket.io fundamentals', desc: 'io.on("connection"), socket.emit, socket.on, socket.broadcast.emit, io.emit. The event-driven model. Automatic reconnection.' },
+                { name: 'Rooms & namespaces', desc: 'socket.join(room), io.to(room).emit, socket.leave. Namespaces for separating concerns. Private messaging pattern.' },
+                { name: 'Scaling WebSocket servers', desc: 'The sticky sessions problem. Socket.io Redis adapter for horizontal scaling. Why a single WebSocket server hits limits and how to fix it.' },
+              ],
+              project: { name: 'Real-time chat application', desc: 'A chat app with Socket.io: multiple rooms, private messages, typing indicators, user presence (online/offline), and message history from PostgreSQL. React frontend + Node backend.' },
+              resources: [
+                { name: 'Socket.io docs', url: 'https://socket.io/docs/v4/', type: 'Docs' },
+                { name: 'WebSocket MDN docs', url: 'https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API', type: 'Docs' },
+              ]
+            }
+          ]
+        },
+        23: {
+          title: 'Web Security', topics: 2, hours: 16, weeks: 1, phase: 'advanced',
+          subtitle: 'Security is not optional. Understanding vulnerabilities is what separates developers who can be trusted with production systems.',
+          skills: ['OWASP Top 10', 'XSS', 'CSRF', 'SQL injection', 'IDOR', 'JWT security', 'CORS', 'CSP', 'HTTPS', 'Dependency auditing'],
+          tip: 'Run your own projects through OWASP ZAP or Burp Suite Community Edition. Seeing real vulnerabilities in code you wrote is the fastest way to learn security.',
+          weeks: [
+            {
+              num: 1, title: 'Web application security fundamentals', hours: 16, diff: 4, color: 'var(--teal)',
+              topics: [
+                { name: 'OWASP Top 10', desc: 'Injection, Broken Auth, Sensitive Data Exposure, XXE, Broken Access Control, Security Misconfiguration, XSS, Insecure Deserialisation, Vulnerable Components, Insufficient Logging.' },
+                { name: 'XSS & CSRF', desc: 'Reflected, stored, and DOM-based XSS. Exploiting innerHTML. CSP headers to mitigate XSS. CSRF tokens, SameSite cookies, and the double-submit pattern.' },
+                { name: 'SQL injection & IDOR', desc: 'Classic and blind SQL injection. Why parameterised queries completely prevent it. Insecure Direct Object Reference — accessing other users\' resources.' },
+                { name: 'Authentication security', desc: 'Password hashing with bcrypt/argon2. Secure JWT practices (algorithm confusion, short expiry). OAuth security. Brute-force protection.' },
+              ],
+              project: { name: 'Security audit & fix', desc: 'Intentionally build a vulnerable Express app with XSS, CSRF, SQL injection, and IDOR vulnerabilities. Then fix every one. Write a report explaining each vulnerability and fix.' },
+              resources: [
+                { name: 'OWASP Top 10', url: 'https://owasp.org/www-project-top-ten/', type: 'Reference' },
+                { name: 'PortSwigger Web Security Academy (free)', url: 'https://portswigger.net/web-security', type: 'Free course' },
+              ]
+            }
+          ]
+        },
+        24: {
+          title: 'CI/CD', topics: 2, hours: 16, weeks: 1, phase: 'advanced',
+          subtitle: 'Automate testing and deployment. Professional teams never deploy manually — and neither should you.',
+          skills: ['GitHub Actions', 'Automated testing in CI', 'Docker basics', 'Docker Compose', 'Container registries', 'Deployment pipelines', 'Environment management', 'Rollback strategies'],
+          tip: 'Even a basic "run tests on every PR" workflow impresses hiring managers. It signals professional habits and a production mindset.',
+          weeks: [
+            {
+              num: 1, title: 'CI/CD pipelines & Docker', hours: 16, diff: 4, color: 'var(--teal)',
+              topics: [
+                { name: 'GitHub Actions', desc: 'Workflows, jobs, steps, actions, triggers (push, pull_request, schedule). Running tests on every PR. Secrets management. Caching node_modules.' },
+                { name: 'Docker fundamentals', desc: 'Images vs containers. Dockerfile (FROM, RUN, COPY, EXPOSE, CMD). docker build, run, push. Multi-stage builds for smaller production images.' },
+                { name: 'Docker Compose', desc: 'Defining multi-service apps (Node + Postgres + Redis) in docker-compose.yml. Volumes, networks, environment files. Development vs production compose files.' },
+                { name: 'Deployment pipelines', desc: 'Automated deployment to Render or Railway on merge to main. Rolling deployments. Health checks. Rollback on failed health check. Notifications on failure.' },
+              ],
+              project: { name: 'Full CI/CD pipeline', desc: 'Set up GitHub Actions: lint → test → build Docker image → push to GitHub Container Registry → deploy to a cloud host on merge. The full pipeline should run in under 3 minutes.' },
+              resources: [
+                { name: 'GitHub Actions docs', url: 'https://docs.github.com/en/actions', type: 'Docs' },
+                { name: 'Docker official docs', url: 'https://docs.docker.com/', type: 'Docs' },
+                { name: 'Play with Docker (free)', url: 'https://labs.play-with-docker.com/', type: 'Interactive' },
+              ]
+            }
+          ]
+        },
+        25: {
+          title: 'Interview Preparation', topics: 2, hours: 40, weeks: 4, phase: 'career',
+          subtitle: 'Consolidate everything and land your first full-stack role. This phase is about demonstrating, not learning.',
+          skills: ['Data structures', 'Algorithms', 'System design', 'Behavioural interviews', 'Technical communication', 'Portfolio polishing', 'Whiteboard coding', 'Take-home projects'],
+          tip: 'Quality over quantity on applications. Spend 4–6 weeks polishing 3 exceptional projects and applying to 10 well-chosen companies rather than spray-and-praying 100 applications.',
+          weeks: [
+            {
+              num: 1, title: 'Data structures & algorithms', hours: 12, diff: 4, color: 'var(--coral)',
+              topics: [
+                { name: 'Core data structures', desc: 'Arrays, linked lists, stacks, queues, hash maps, trees, graphs. Know their time and space complexities. Implement each from scratch in JavaScript.' },
+                { name: 'Sorting & searching', desc: 'Bubble, selection, insertion, merge, quick sort. Binary search. When to use each. Understanding O(n log n) vs O(n²).' },
+                { name: 'Common problem patterns', desc: 'Two pointers, sliding window, fast & slow pointers, merge intervals, tree BFS/DFS, dynamic programming basics. Recognising which pattern fits which problem.' },
+              ],
+              project: { name: 'LeetCode practice', desc: 'Solve 30 problems: 10 easy, 15 medium, 5 hard. Focus on arrays, strings, hash maps, and binary trees — the most common interview topics. Time yourself to simulate interview pressure.' },
+              resources: [
+                { name: 'Neetcode.io (structured problems)', url: 'https://neetcode.io/', type: 'Practice' },
+                { name: 'Blind 75 list', url: 'https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions', type: 'Reference' },
+              ]
+            },
+            {
+              num: 2, title: 'System design', hours: 10, diff: 5, color: 'var(--coral)',
+              topics: [
+                { name: 'System design fundamentals', desc: 'Scalability, reliability, availability. Horizontal vs vertical scaling. Load balancers. CAP theorem. SQL vs NoSQL trade-offs.' },
+                { name: 'Common system design patterns', desc: 'Design URL shortener, rate limiter, chat system, social media feed, file storage service. Each follows a pattern: requirements → estimation → design → deep dive.' },
+                { name: 'Database design at scale', desc: 'Sharding, replication, read replicas. Caching strategies (CDN, Redis). Message queues for async processing. Event-driven architecture basics.' },
+              ],
+              project: { name: 'System design presentation', desc: 'Design 3 systems on paper/Excalidraw: a URL shortener, a real-time chat platform, and a social media news feed. Present your design out loud as if in an interview.' },
+              resources: [
+                { name: 'System Design Primer (free)', url: 'https://github.com/donnemartin/system-design-primer', type: 'Free book' },
+                { name: 'ByteByteGo newsletter', url: 'https://blog.bytebytego.com/', type: 'Newsletter' },
+              ]
+            },
+            {
+              num: 3, title: 'Portfolio & behavioural prep', hours: 10, diff: 2, color: 'var(--coral)',
+              topics: [
+                { name: 'Portfolio polishing', desc: 'Every project needs: a live URL, a README with screenshots and setup instructions, and a clear description of the problem it solves. Remove unfinished projects.' },
+                { name: 'The STAR method', desc: 'Situation, Task, Action, Result. Write 8–10 STAR stories from your projects covering: a challenge overcome, a technical decision made, a mistake and lesson learned, leadership.' },
+                { name: 'Technical communication', desc: 'Practice explaining your projects clearly to non-technical people. Then explain them to technical people. The ability to context-switch communication style is valued highly.' },
+              ],
+              project: { name: 'Portfolio site v2', desc: 'Rebuild your portfolio with your best 3–4 projects prominently featured. Each project card should link to live demo and GitHub. Include a clear "hire me" call to action.' },
+              resources: [
+                { name: 'Levels.fyi (salary data)', url: 'https://www.levels.fyi/', type: 'Reference' },
+              ]
+            },
+            {
+              num: 4, title: 'Mock interviews & job applications', hours: 8, diff: 3, color: 'var(--coral)',
+              topics: [
+                { name: 'Mock technical interviews', desc: 'Use Pramp or Interviewing.io for free peer mock interviews. Do at least 5 mock sessions before applying. The first real interview should not be your first interview.' },
+                { name: 'Job application strategy', desc: 'Target companies with a real product you understand. Personalise every cover letter. Apply to 5–8 roles per week, not 50. Track applications in a spreadsheet.' },
+                { name: 'Negotiating offers', desc: 'Always negotiate. The first offer is almost never the final offer. Research market rates on Levels.fyi and LinkedIn Salary. Negotiate total compensation, not just base salary.' },
+              ],
+              project: { name: 'Active job search', desc: 'Have 3 deployed projects, an updated LinkedIn, a clean GitHub, and a polished resume. Apply to 30 targeted companies over 4 weeks. Track every application and follow up.' },
+              resources: [
+                { name: 'Pramp (mock interviews)', url: 'https://www.pramp.com/', type: 'Free tool' },
+                { name: 'Interviewing.io', url: 'https://interviewing.io/', type: 'Tool' },
+              ]
+            }
+          ]
+        }
+      }
+    };
+
+    let currentPage = 'dashboard';
+    let completedModules = JSON.parse(localStorage.getItem('fs_completed') || '[]');
+    let lightMode = localStorage.getItem('fs_theme') === 'light';
+
+    if (lightMode) document.documentElement.classList.add('light');
+
+    function getPhase(id) { return DATA.phases.find(p => p.id === id); }
+    function getModule(num) { return DATA.modules[num]; }
+
+    function saveProgress() { localStorage.setItem('fs_completed', JSON.stringify(completedModules)); }
+
+    function updateProgressBar() {
+      const total = Object.keys(DATA.modules).length;
+      const done = completedModules.length;
+      const pct = Math.round((done / total) * 100);
+      document.getElementById('prog-bar-fill').style.width = pct + '%';
+      document.getElementById('prog-pct').textContent = pct + '%';
+    }
+
+    function buildSidebar() {
+      const sb = document.getElementById('sidebar');
+      sb.innerHTML = '';
+      DATA.phases.forEach(phase => {
+        const group = document.createElement('div');
+        group.className = 'phase-group';
+        group.innerHTML = `<div class="phase-group-header"><div class="phase-dot" style="background:${phase.color}"></div><span class="phase-group-label">Phase ${phase.num} — ${phase.label}</span></div>`;
+        phase.modules.forEach(mNum => {
+          const mod = getModule(mNum);
+          const done = completedModules.includes(mNum);
+          const item = document.createElement('div');
+          item.className = 'sidebar-item' + (currentPage == mNum ? ' active' : '');
+          item.id = 'sb-' + mNum;
+          item.innerHTML = `<span class="mod-num">${String(mNum).padStart(2, '0')}</span><span class="mod-name">${mod.title}</span><div class="check ${done ? 'done' : ''}">✓</div>`;
+          item.onclick = () => navigate(mNum);
+          group.appendChild(item);
+        });
+        sb.appendChild(group);
+      });
+    }
+
+    function toggleSidebar() {
+      const sb = document.getElementById('sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      sb.classList.toggle('open');
+      backdrop.classList.toggle('open');
+    }
+
+    function navigate(page) {
+      currentPage = page;
+      document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+      if (page !== 'dashboard') {
+        const el = document.getElementById('sb-' + page);
+        if (el) el.classList.add('active');
+      }
+      render();
+      document.getElementById('main').scrollTop = 0;
+      
+      if (window.innerWidth <= 900) {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-backdrop').classList.remove('open');
+      }
+    }
+
+    function phaseColor(phaseId) { return getPhase(phaseId)?.color || 'var(--accent)'; }
+
+    function renderDashboard() {
+      const total = Object.keys(DATA.modules).length;
+      const done = completedModules.length;
+      const totalHours = Object.values(DATA.modules).reduce((a, m) => a + (m.hours || 0), 0);
+      const totalWeeks = Object.values(DATA.modules).reduce((a, m) => a + (m.weeks ? m.weeks.length : 0), 0);
+      let html = `<div id="dashboard">
+  <div class="dash-hero">
+    <h1>Master <span>Full Stack</span><br>Development</h1>
+    <p>25 modules · 5 phases · ${totalHours}+ hours of curated study. Click any phase or module to start learning.</p>
+  </div>
+  <div class="dash-stats">
+    <div class="dash-stat s1"><div class="sv">${total}</div><div class="sl">Total modules</div></div>
+    <div class="dash-stat s2"><div class="sv">${done}</div><div class="sl">Completed</div></div>
+    <div class="dash-stat s3"><div class="sv">${totalHours}+</div><div class="sl">Hours of content</div></div>
+    <div class="dash-stat s4"><div class="sv">${totalWeeks}</div><div class="sl">Study weeks</div></div>
+  </div>
+  <div class="section-title">Learning phases</div>
+  <div class="phases-overview">`;
+      DATA.phases.forEach(phase => {
+        const pDone = phase.modules.filter(m => completedModules.includes(m)).length;
+        const pPct = Math.round((pDone / phase.modules.length) * 100);
+        const chips = phase.modules.map(m => {
+          const mod = getModule(m);
+          const isDone = completedModules.includes(m);
+          return `<span class="phase-mod-chip ${isDone ? 'done-chip' : ''}" onclick="event.stopPropagation();navigate(${m})">${mod.title}</span>`;
+        }).join('');
+        html += `<div class="phase-ov-card" onclick="navigate(${phase.modules[0]})">
+      <div class="phase-ov-header">
+        <span class="phase-ov-num">Phase ${phase.num}</span>
+        <span class="phase-ov-name" style="color:${phase.color}">${phase.label}</span>
+        <span class="phase-ov-count">${pDone}/${phase.modules.length} modules · ${pPct}%</span>
+      </div>
+      <div class="phase-ov-desc">${phase.desc}</div>
+      <div class="phase-mod-chips">${chips}</div>
+      <div class="phase-prog-bar"><div class="phase-prog-fill" style="background:${phase.color};width:${pPct}%"></div></div>
+    </div>`;
+      });
+      html += '</div></div>';
+      return html;
+    }
+
+    function renderModule(num) {
+      const mod = getModule(num);
+      const phase = getPhase(mod.phase);
+      const isDone = completedModules.includes(num);
+      const color = phase.color;
+
+      let html = `<div class="mod-header">
+    <div class="phase-tag" style="color:${color};background:${phase.bg};border-color:${color}40">
+      Phase ${phase.num} · ${phase.label}
+    </div>
+    <h1>Module ${String(num).padStart(2, '0')} — ${mod.title}</h1>
+    <div class="subtitle">${mod.subtitle}</div>
+    <div class="mod-meta-row">
+      <div class="meta-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${mod.hours}+ hours</div>
+      <div class="meta-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${mod.weeks ? mod.weeks.length : 0} week${(mod.weeks ? mod.weeks.length : 0) > 1 ? 's' : ''}</div>
+      <div class="meta-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>${mod.topics} topics</div>
+    </div>
+  </div>`;
+
+      html += `<div class="tip-box"><div class="tip-icon">💡</div><div><div class="tip-label">Pro tip</div><div class="tip-text">${mod.tip}</div></div></div>`;
+
+      html += `<div class="section-title">Skills you'll learn</div>
+  <div class="skills-wrap">${mod.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>`;
+
+      html += `<div class="section-title">Weekly study plan</div><div class="week-list">`;
+      mod.weeks.forEach((w, wi) => {
+        const diffs = Array.from({ length: 5 }, (_, i) => `<div class="diff-pip" style="background:${i < w.diff ? w.color : 'var(--bg4)'}"></div>`).join('');
+        const topicsHtml = w.topics.map(t => `<div class="topic-item"><div class="topic-bullet" style="background:${w.color}"></div><div><div class="topic-name">${t.name}</div><div class="topic-desc">${t.desc}</div></div></div>`).join('');
+        const resHtml = w.resources.map(r => `<a class="res-card" href="${r.url}" target="_blank"><div class="res-icon" style="background:${phase.bg}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><div><div class="res-name">${r.name}</div><div class="res-type">${r.type}</div></div></a>`).join('');
+        html += `<div class="week-card">
+      <div class="week-head" onclick="toggleWeek(this)">
+        <span class="week-num-badge">Week ${w.num}</span>
+        <span class="week-title-text">${w.title}</span>
+        <span class="week-hours">${w.hours} hrs</span>
+        <div class="diff-row">${diffs}</div>
+        <svg class="week-chev ${wi === 0 ? 'open' : ''}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="week-body ${wi === 0 ? 'open' : ''}">
+        ${topicsHtml}
+        <div class="week-footer">
+          <div class="project-box">
+            <div class="proj-label">Mini project</div>
+            <div class="proj-name">${w.project.name}</div>
+            <div class="proj-desc">${w.project.desc}</div>
+          </div>
+        </div>
+        ${resHtml.length ? `<div class="section-title" style="margin-top:16px;font-size: 15px">Resources</div><div class="resources-grid">${resHtml}</div>` : ''}
+      </div>
+    </div>`;
+      });
+      html += `</div>`;
+
+      const prevNum = num > 1 ? num - 1 : null;
+      const nextNum = DATA.modules[num + 1] ? num + 1 : null;
+      html += `<div style="display:flex;gap:12px;align-items:center;margin-top:8px;flex-wrap:wrap">
+    <button class="done-btn ${isDone ? 'done' : ''}" onclick="toggleDone(${num},this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      ${isDone ? 'Completed ✓' : 'Mark as complete'}
+    </button>
+    ${prevNum ? `<button class="done-btn" onclick="navigate(${prevNum})" style="margin-left:auto">← Module ${prevNum}</button>` : ''}
+    ${nextNum ? `<button class="done-btn" onclick="navigate(${nextNum})" style="${prevNum ? '' : 'margin-left:auto'}">Module ${nextNum} →</button>` : ''}
+  </div>`;
+
+      return html;
+    }
+
+    function toggleWeek(header) {
+      const body = header.nextElementSibling;
+      const chev = header.querySelector('.week-chev');
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      chev.classList.toggle('open', !isOpen);
+    }
+
+    function toggleDone(num, btn) {
+      if (completedModules.includes(num)) {
+        completedModules = completedModules.filter(n => n !== num);
+        btn.classList.remove('done');
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Mark as complete`;
+      } else {
+        completedModules.push(num);
+        btn.classList.add('done');
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Completed ✓`;
+      }
+      saveProgress();
+      updateProgressBar();
+      buildSidebar();
+    }
+
+    function render() {
+      const area = document.getElementById('content-area');
+      if (currentPage === 'dashboard') {
+        area.innerHTML = renderDashboard();
+      } else {
+        area.innerHTML = renderModule(currentPage);
+      }
+    }
+
+    function doSearch(q) {
+      const area = document.getElementById('content-area');
+      if (!q.trim()) { render(); return; }
+      const ql = q.toLowerCase();
+      const results = Object.entries(DATA.modules).filter(([num, mod]) =>
+        mod.title.toLowerCase().includes(ql) ||
+        mod.subtitle.toLowerCase().includes(ql) ||
+        mod.skills.some(s => s.toLowerCase().includes(ql)) ||
+        mod.weeks.some(w => w.title.toLowerCase().includes(ql) || w.topics.some(t => t.name.toLowerCase().includes(ql)))
+      );
+      let html = `<div style="font-size: 14px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:16px">${results.length} result${results.length !== 1 ? 's' : ''} for "${q}"</div>`;
+      if (results.length === 0) {
+        html += `<div style="color:var(--text2);font-size: 15px">No modules matched your search. Try a keyword like "async", "React", or "database".</div>`;
+      } else {
+        html += `<div class="search-results">`;
+        results.forEach(([num, mod]) => {
+          const phase = getPhase(mod.phase);
+          html += `<div class="search-result-item" onclick="document.getElementById('search').value='';navigate(${num})">
+        <span class="sr-mod">M${String(num).padStart(2, '0')}</span>
+        <span class="sr-name">${mod.title}</span>
+        <span class="sr-phase" style="color:${phase.color};background:${phase.bg}">${phase.label}</span>
+      </div>`;
+        });
+        html += `</div>`;
+      }
+      area.innerHTML = html;
+    }
+
+    document.getElementById('search').addEventListener('input', e => doSearch(e.target.value));
+
+    document.getElementById('theme-btn').addEventListener('click', () => {
+      lightMode = !lightMode;
+      document.documentElement.classList.toggle('light', lightMode);
+      localStorage.setItem('fs_theme', lightMode ? 'light' : 'dark');
+      document.getElementById('theme-icon-dark').style.display = lightMode ? 'none' : 'block';
+      document.getElementById('theme-icon-light').style.display = lightMode ? 'block' : 'none';
+    });
+
+    if (lightMode) {
+      document.getElementById('theme-icon-dark').style.display = 'none';
+      document.getElementById('theme-icon-light').style.display = 'block';
+    }
+
+    document.getElementById('logo-area').style.cursor = 'pointer';
+    document.getElementById('logo-area').addEventListener('click', (e) => {
+      if (e.target.closest('#sidebar-toggle')) return;
+      navigate('dashboard');
+    });
+
+    document.getElementById('sidebar-toggle').addEventListener('click', (e) => {
+      toggleSidebar();
+    });
+
+    document.getElementById('sidebar-backdrop').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-backdrop').classList.remove('open');
+    });
+
+    buildSidebar();
+    updateProgressBar();
+    render();
+  </script>
+</body>
+
+</html>
